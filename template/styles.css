@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+body {
+  margin: 0;
+
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+}
+
+.background {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+
+  background: url('https://korekuta.ru/static/minigames/project231231/static-images/site-bg.png');
+  background-size: cover;
+  filter: blur(10px);
+
+  transform: scale(1.2);
+}
+
+.wrapper {
+  flex: 1;
+
+  position: relative;
+
+  aspect-ratio: 1920 / 1080;
+
+  max-width: 1920px;
+  max-height: 1080px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+#ui {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  min-width: 1280px;
+  max-width: 1920px;
+
+  min-height: 720px;
+  max-height: 1080px;
+
+  display: flex;
+
+}
+
+.loading {
+  backdrop-filter: blur(20px);
+
+  background: rgb(2, 0, 36);
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+}
+
+.buttonContainer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.75);
+
+  cursor: pointer;
+}
+
+#playBtn {
+  margin: auto;
+
+  appearance: none;
+
+  background: rgba(0, 255, 128, 0.5);
+  color: white;
+
+  padding: 40px;
+  font-size: 50px;
+
+  border: none;
+  border-radius: 46px;
+
+  transition: opacity 0.5s ease;
+}
+
+.buttonContainer:hover #playBtn {
+  opacity: 0.75;
+}
+
+#hud {
+  display: flex;
+  flex: 1;
+
+  pointer-events: none;
+}
+
+.center {
+  margin: 12px auto 0;
+
+  display: grid;
+  grid-template-columns: repeat(2, 140px);
+  gap: 20px;
+
+  max-height: 40px;
+}
+
+.center .bar {
+  position: static;
+}
+
+.bar {
+  position: absolute;
+  min-width: 100px;
+  padding: 10px;
+
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+
+  border-radius: 36px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#points {
+  right: 12px;
+  top: 12px;
+}
+
+#health {
+  left: 12px;
+  top: 12px;
+}
+
+.value {
+  margin-left: 4px;
+}
+
+.hide {
+  display: none;
+}
