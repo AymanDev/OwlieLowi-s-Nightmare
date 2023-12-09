@@ -1,0 +1,9 @@
+.speed {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 20px;
+}
+
+.speed .bar {
+  position: static;
+}

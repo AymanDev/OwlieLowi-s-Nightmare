@@ -17,7 +17,6 @@
               <div id="speed" class="bar pixelBorder">Ускорение: <span class="value">1</span></div>
               <div id="drag" class="bar pixelBorder">Замедление: <span class="value">1</span></div>
             </div>
-            <div id="points" class="bar pixelBorder">Очков: <span class="value">0</span></div>
 
             <div class="center">
               <div id="horny">
@@ -25,10 +24,27 @@
                 <div class="heart"></div>
               </div>
             </div>
+
+            <div class="right">
+              <div id="points" class="bar pixelBorder">Очков: <span class="value">0</span></div>
+            </div>
+
+            <div id="hornyWarning" class="hide">
+              <div class="popup">
+                <div class="bg"></div>
+                <span class="text">Вы слишком хорни!</span>
+              </div>
+            </div>
+          </div>
+
+          <div id="gameOver" class="hide">
+            <h1 class="title">Вы проиграли!</h1>
+            <div class="points">Очков: <span class="value">0</span></div>
+            <button id="restart" class="pixelBorder">Перезапустить</button>
           </div>
 
           <div class="buttonContainer">
-            <button id="playBtn">Играть</button>
+            <button id="playBtn" class="pixelBorder">Играть</button>
           </div>
         </div>
         <canvas id="game"></canvas>

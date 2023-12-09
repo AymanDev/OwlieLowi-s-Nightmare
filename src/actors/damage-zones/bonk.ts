@@ -1,4 +1,4 @@
-import { Actor, ActorArgs, CollisionType, Color, Rectangle, Shape, Timer, Trigger, vec } from 'excalibur';
+import { Actor, ActorArgs, CollisionType, Color, Logger, Rectangle, Shape, Timer, Trigger, vec } from 'excalibur';
 
 import { damageZoneCollisionGroup } from '../../collision-groups';
 import { Game } from '../../game';
@@ -11,8 +11,6 @@ const SPEED = 50;
 export class Bonk extends Actor {
   private _movementTimer: Timer;
   private _attackTimer: Timer;
-
-  private _currentDifficulty = 1;
 
   private _currentDirection = 0;
 
@@ -36,11 +34,6 @@ export class Bonk extends Actor {
     this.updateTimers(engine);
   }
 
-  addDifficulty(engine: Game, difficultyIncrease: number) {
-    this._currentDifficulty += difficultyIncrease;
-    this.updateTimers(engine);
-  }
-
   updateTimers(engine: Game) {
     if (this._movementTimer) {
       engine.currentScene.removeTimer(this._movementTimer);
@@ -55,9 +48,9 @@ export class Bonk extends Actor {
           this._currentDirection = 1;
         }
 
-        this.vel.x = this._currentDirection * SPEED * this._currentDifficulty;
+        this.vel.x = this._currentDirection * SPEED * engine.gameZone.currentDifficulty;
       },
-      interval: 5000 / this._currentDifficulty,
+      interval: 5000 / engine.gameZone.currentDifficulty,
       repeats: true
     });
 
@@ -75,10 +68,10 @@ export class Bonk extends Actor {
         this._damageZone.activate();
       },
       repeats: true,
-      interval: Math.max(1000, 5000 / this._currentDifficulty)
+      interval: Math.max(750, 5000 / engine.gameZone.currentDifficulty)
     });
 
-    console.log('timer', this._currentDifficulty, 5000 / this._currentDifficulty);
+    Logger.getInstance().info('Enemy timer', engine.gameZone.currentDifficulty, 5000 / engine.gameZone.currentDifficulty);
 
     engine.currentScene.add(this._attackTimer);
     this._attackTimer.start();
@@ -118,6 +111,7 @@ export class BonkDamageZone extends Actor {
         color: new Color(255, 0, 0, 0.25)
       })
     );
+    this.graphics.visible = false;
 
     this.deactivate();
 

@@ -1,12 +1,27 @@
-import { Engine, Scene } from 'excalibur';
+import { Scene, SceneActivationContext } from 'excalibur';
 
+import { Game } from '../../game';
 import { Resources } from '../../resources';
 import { uiManager } from '../../ui/ui-manager';
 
 export class GameOver extends Scene {
-  onInitialize(_engine: Engine): void {
+  onInitialize(engine: Game): void {
     Resources.GameOverSfx.play(1);
 
+    uiManager.gameOver.addRestartButtonListener(() => this.onRestart(engine));
+  }
+
+  onActivate(context: SceneActivationContext<unknown>): void {
+    const engine = context.engine as Game;
+
     uiManager.hud.hide();
+    uiManager.gameOver.show();
+    uiManager.gameOver.updateFinalPoints(engine.points);
+  }
+
+  onRestart(engine: Game) {
+    uiManager.gameOver.hide();
+
+    engine.restart();
   }
 }

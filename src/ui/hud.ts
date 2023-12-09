@@ -10,6 +10,8 @@ const dragText = hud.querySelector('#drag > .value');
 
 const hornyValueElement = hud.querySelector<HTMLDivElement>('#horny > .value');
 
+const hornyWarningEl = hud.querySelector('#hornyWarning');
+
 export class Hud extends BaseUi {
   constructor() {
     super(hud);
@@ -33,5 +35,13 @@ export class Hud extends BaseUi {
 
   public updateHornyValueUI(horny: number) {
     hornyValueElement.style.width = `${horny}%`;
+  }
+
+  public showHornyWarning() {
+    hornyWarningEl.classList.remove('hide');
+  }
+
+  public hideHornyWarning() {
+    hornyWarningEl.classList.add('hide');
   }
 }

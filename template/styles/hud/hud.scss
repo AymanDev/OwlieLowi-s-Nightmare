@@ -1,0 +1,49 @@
+#hud {
+  display: flex;
+  flex: 1;
+
+  pointer-events: none;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+}
+
+.left > div {
+  margin-top: 12px;
+  margin-left: 12px;
+}
+
+.center {
+  margin: 12px auto 0;
+}
+
+.right {
+  margin-top: 12px;
+  margin-right: 12px;
+}
+
+.bar {
+  min-width: 100px;
+  padding: 15px;
+
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 1em;
+}
+
+.value {
+  margin-left: 4px;
+}
+
+@import './drag.scss';
+@import './health.scss';
+@import './horny.scss';
+@import './points.scss';
+@import './speed.scss';

@@ -19,6 +19,7 @@ export class Player extends Actor {
   private _dragModificator = 1;
 
   private _horny = 0;
+  private _isInHornyMode = false;
 
   constructor() {
     super({
@@ -72,9 +73,14 @@ export class Player extends Actor {
   }
 
   onInitialize() {
+    this.isDead = false;
     this.health = 100;
+    this.speedModificator = 1;
+    this.dragModificator = 1;
+    this.horny = 0;
 
     this.graphics.use(Resources.ActorMain.toSprite());
+    uiManager.hud.updateHealthUI(this.health);
   }
 
   damage(damage: number) {
@@ -108,8 +114,38 @@ export class Player extends Actor {
       return;
     }
 
+    this.updateHorny();
+
     this.applyDrag();
     this.updateInputs(engine);
+
+    if (Math.abs(this.vel.x) > 0 || Math.abs(this.vel.y) > 0) {
+      if (!Resources.FootstepSfx.isPlaying()) {
+        Resources.FootstepSfx.playbackRate = rand.floating(0.5, 1.5);
+        Resources.FootstepSfx.play(0.08);
+      }
+    }
+  }
+
+  updateHorny() {
+    if (this._isInHornyMode) {
+      if (this.horny <= 75) {
+        this._isInHornyMode = false;
+        uiManager.hud.hideHornyWarning();
+      }
+
+      return;
+    }
+
+    if (this.horny < 100) {
+      this.horny += 0.05;
+      return;
+    }
+
+    this._isInHornyMode = true;
+    uiManager.hud.showHornyWarning();
+
+    Resources.AlarmSfx.play(0.25);
   }
 
   applyDrag() {
@@ -175,5 +211,7 @@ export class Player extends Actor {
     this.vel.y = 0;
 
     engine.goToScene('gameover');
+
+    uiManager.hud.hideHornyWarning();
   }
 }

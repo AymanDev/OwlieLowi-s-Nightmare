@@ -1,0 +1,97 @@
+#horny {
+  min-width: 512px;
+
+  margin-top: 20px;
+
+  border: 3px solid rgb(203, 103, 182);
+
+  height: 50px;
+}
+
+#horny .value {
+  width: 0%;
+
+  background: rgba(243, 77, 207, 0.514);
+  margin-left: 0;
+
+  height: 100%;
+}
+
+@keyframes showHorny {
+  0% {
+    opacity: 0;
+    transform: translateY(2000px);
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+#hornyWarning {
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  justify-content: center;
+
+  &:not(.hide) {
+    animation-name: showHorny;
+    animation-duration: 0.5s;
+  }
+
+  .popup {
+    margin-top: auto;
+    margin-bottom: 20px;
+    max-height: 40px;
+
+    min-width: 500px;
+
+    position: relative;
+    border: 1px solid white;
+
+    padding: 40px;
+
+    .bg {
+      position: absolute;
+
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+
+      background: url('../images/ui/horny-bg.png');
+      background-position: 0 -90px;
+      background-size: cover;
+      filter: blur(2px);
+    }
+
+    .text {
+      position: absolute;
+
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+
+      z-index: 1;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      color: white;
+      -webkit-text-stroke: 1px black;
+      font-size: 32px;
+    }
+  }
+}

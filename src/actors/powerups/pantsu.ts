@@ -32,7 +32,7 @@ export class Pantsu extends Actor {
           engine.points += 20;
           engine.player.speedModificator += 0.2;
           engine.player.dragModificator += 0.2;
-          engine.player.horny += 7;
+          engine.player.horny += 10;
 
           this.kill();
         }

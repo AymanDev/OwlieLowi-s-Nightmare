@@ -9,13 +9,17 @@ import pearImage from './images/items/pear.png';
 import vodkaImage from './images/items/vodka.png';
 import eekSfx from './sounds/eek_sfx.wav';
 import gameOverSound from './sounds/gameover.wav';
-import mainThemeMusic from './sounds/music/main.wav';
+import gamePlayMusic from './sounds/music/gameplay.wav';
+import gameStartSound from './sounds/music/gamestart.wav';
+import mainMenuMusic from './sounds/music/mainmenu.wav';
 import fruitIceSound from './sounds/powerups/fruit_ice.wav';
 import mangaSound from './sounds/powerups/manga_powerup.wav';
 import mangaSoundAlt from './sounds/powerups/manga_powerup1.wav';
 import pantsuSound from './sounds/powerups/pantsu.wav';
 import vodkaSound from './sounds/powerups/vodka_powerup.wav';
+import alarmSfx from './sounds/sfx/alarm.wav';
 import collectSound from './sounds/sfx/collect.wav';
+import footstepSfx from './sounds/sfx/footstep.wav';
 
 /**
  * Default global resource dictionary. This gets loaded immediately
@@ -25,14 +29,18 @@ const Resources = {
   ActorMain: new ImageSource(actorMain),
   ActorChat: new ImageSource(actorChat),
 
-  MainThemeMusic: new Sound(mainThemeMusic),
+  MainMenuThemeMusic: new Sound(mainMenuMusic),
+  GamePlayMusic: new Sound(gamePlayMusic),
+
+  GameStartSound: new Sound(gameStartSound),
 
   CollectSfx: new Sound(collectSound),
 
   // SFX
   EekSfx: new Sound(eekSfx),
-
   GameOverSfx: new Sound(gameOverSound),
+  FootstepSfx: new Sound(footstepSfx),
+  AlarmSfx: new Sound(alarmSfx),
 
   // Items
   VodkaImage: new ImageSource(vodkaImage),

@@ -1,0 +1,46 @@
+#gameOver {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.5);
+
+  color: white;
+
+  pointer-events: all;
+
+  .title {
+    margin-bottom: 150px;
+  }
+
+  .points {
+    margin-bottom: 120px;
+  }
+
+  #restart {
+    margin-top: 20px;
+
+    font-size: 32px;
+
+    padding: 20px;
+
+    background: rgba(0, 255, 128, 0.5);
+    border: none;
+    color: white;
+
+    cursor: pointer;
+
+    transition: opacity 0.5s ease;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+}
