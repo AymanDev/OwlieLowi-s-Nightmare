@@ -1,7 +1,8 @@
-import { Actor, ActorArgs, CollisionType, Color, Random, Rectangle, Shape, Timer, Trigger, vec } from 'excalibur';
-import { Resources } from '../../resources';
+import { Actor, ActorArgs, CollisionType, Color, Rectangle, Shape, Timer, Trigger, vec } from 'excalibur';
+
 import { damageZoneCollisionGroup } from '../../collision-groups';
-import { Game } from '../..';
+import { Game } from '../../game';
+import { Resources } from '../../resources';
 
 const WIDTH = 200;
 const HEIGHT = 720;
@@ -37,7 +38,6 @@ export class Bonk extends Actor {
 
   addDifficulty(engine: Game, difficultyIncrease: number) {
     this._currentDifficulty += difficultyIncrease;
-
     this.updateTimers(engine);
   }
 
@@ -75,8 +75,10 @@ export class Bonk extends Actor {
         this._damageZone.activate();
       },
       repeats: true,
-      interval: 3000 / this._currentDifficulty
+      interval: Math.max(1000, 5000 / this._currentDifficulty)
     });
+
+    console.log('timer', this._currentDifficulty, 5000 / this._currentDifficulty);
 
     engine.currentScene.add(this._attackTimer);
     this._attackTimer.start();
@@ -98,7 +100,7 @@ export class BonkDamageZone extends Actor {
 
   onInitialize(engine: Game): void {
     this._trigger = new Trigger({
-      width: WIDTH,
+      width: WIDTH / 2,
       height: HEIGHT,
       pos: vec(0, 0),
 
@@ -111,7 +113,7 @@ export class BonkDamageZone extends Actor {
 
     this.graphics.use(
       new Rectangle({
-        width: WIDTH,
+        width: WIDTH / 2,
         height: HEIGHT,
         color: new Color(255, 0, 0, 0.25)
       })
@@ -121,7 +123,7 @@ export class BonkDamageZone extends Actor {
 
     this._deactivatorTimer = new Timer({
       fcn: this.deactivate.bind(this),
-      interval: 1000
+      interval: 500
     });
     engine.add(this._deactivatorTimer);
   }

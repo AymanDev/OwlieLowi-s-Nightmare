@@ -12,11 +12,13 @@
     },
     "plugins": [
         "@typescript-eslint",
-        "jsdoc"
+        "jsdoc",
+        "import"
     ],
     "extends": [
         "plugin:jsdoc/recommended",
-        "prettier"
+        "prettier",
+        "plugin:import/typescript"
     ],
     "rules": {
         "@typescript-eslint/naming-convention": [
@@ -146,6 +148,34 @@
                     "credit",
                     "typedoc"
                 ]
+            }
+        ],
+        "import/order": [
+            "error",
+            {
+                "alphabetize": {
+                    "order": "asc"
+                },
+                "groups": [
+                    [
+                        "builtin",
+                        "external"
+                    ],
+                    [
+                        "internal",
+                        "parent",
+                        "sibling"
+                    ],
+                    "index"
+                ],
+                "newlines-between": "always"
+            }
+        ],
+        "import/no-unresolved": [
+            "error",
+            {
+                "commonjs": true,
+                "caseSensitive": true
             }
         ]
     }

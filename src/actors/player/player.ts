@@ -1,12 +1,14 @@
-import { Actor, CollisionType, Color, Engine, Keys, Logger, Shape, vec } from 'excalibur';
+import { Actor, CollisionType, Color, Engine, Keys, Logger, Random, Shape, vec } from 'excalibur';
 
-import { Resources } from '../../resources';
 import { playerCollisionGroup } from '../../collision-groups';
-import { updateDragUI, updateHealthUI, updateSpeedUI } from '../../ui-manager';
-import { Game } from '../..';
+import { Game } from '../../game';
+import { Resources } from '../../resources';
+import { uiManager } from '../../ui/ui-manager';
 
 const SPEED = 200;
 const DRAG = 15;
+
+const rand = new Random();
 
 export class Player extends Actor {
   public health = 100;
@@ -16,14 +18,16 @@ export class Player extends Actor {
   private _speedModificator = 1;
   private _dragModificator = 1;
 
+  private _horny = 0;
+
   constructor() {
     super({
       pos: vec(1280 / 2, 720 / 2),
-      width: 25,
-      height: 25,
+      width: 80,
+      height: 80,
       color: new Color(0, 0, 0),
 
-      collider: Shape.Box(128, 128),
+      collider: Shape.Box(80, 80),
       collisionType: CollisionType.Active,
       collisionGroup: playerCollisionGroup
     });
@@ -36,7 +40,7 @@ export class Player extends Actor {
   public set speedModificator(value: number) {
     this._speedModificator = value;
 
-    updateSpeedUI(value);
+    uiManager.hud.updateSpeedUI(value);
   }
 
   public get dragModificator() {
@@ -46,7 +50,25 @@ export class Player extends Actor {
   public set dragModificator(value: number) {
     this._dragModificator = value;
 
-    updateDragUI(value);
+    uiManager.hud.updateDragUI(value);
+  }
+
+  public get horny() {
+    return this._horny;
+  }
+
+  public set horny(value: number) {
+    this._horny = value;
+
+    if (this._horny > 100) {
+      this._horny = 100;
+    }
+
+    if (this._horny < 0) {
+      this._horny = 0;
+    }
+
+    uiManager.hud.updateHornyValueUI(this._horny);
   }
 
   onInitialize() {
@@ -56,15 +78,22 @@ export class Player extends Actor {
   }
 
   damage(damage: number) {
-    if (this.health <= 0) {
-      this.health = 0;
-      this.isDead = true;
-      return;
+    if (damage > 0) {
+      if (!Resources.EekSfx.isPlaying()) {
+        Resources.EekSfx.playbackRate = rand.floating(0.9, 1.1);
+        Resources.EekSfx.play(1);
+      }
+
+      this.horny -= 1;
     }
 
     this.health -= damage;
 
-    updateHealthUI(this.health);
+    if (this.health <= 0) {
+      this.health = 0;
+    }
+
+    uiManager.hud.updateHealthUI(this.health);
   }
 
   heal(heal: number) {

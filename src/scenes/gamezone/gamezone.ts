@@ -1,28 +1,34 @@
-import { Actor, CollisionType, EdgeCollider, Engine, Scene, Timer, vec } from 'excalibur';
-import { Vodka } from '../../actors/powerups/vodka';
+import { Actor, CollisionType, EdgeCollider, Scene, Timer, vec } from 'excalibur';
+
 import { Bonk } from '../../actors/damage-zones/bonk';
 import { Hole } from '../../actors/damage-zones/hole';
-import { Pear } from '../../actors/powerups/pear';
 import { Player } from '../../actors/player/player';
-import { Game } from '../..';
+import { FruitIce } from '../../actors/powerups/fruit-ice';
 import { Manga } from '../../actors/powerups/manga';
+import { Pantsu } from '../../actors/powerups/pantsu';
+import { Pear } from '../../actors/powerups/pear';
+import { Vodka } from '../../actors/powerups/vodka';
+import { Game } from '../../game';
+import { uiManager } from '../../ui/ui-manager';
 
 export const WIDTH = 1280;
 export const HEIGHT = 720;
 export const SCENE_PADDING = 70;
 
-export type ObjectOnMapKey = 'hole' | 'vodka' | 'pear' | 'manga';
+export type ObjectOnMapKey = 'hole' | 'vodka' | 'pear' | 'manga' | 'fruitIce' | 'pantsu';
 
 export class GameZone extends Scene {
-  private _objectsOnMap: Record<ObjectOnMapKey, number> = { hole: 0, vodka: 0, pear: 0, manga: 0 };
+  private _objectsOnMap: Record<ObjectOnMapKey, number> = { hole: 0, vodka: 0, pear: 0, manga: 0, fruitIce: 0, pantsu: 0 };
 
   private _enemy = new Bonk();
-  public player = new Player();
+  private _player = new Player();
 
-  private _difficultyTimer;
+  private _difficultyTimer: Timer;
 
   public onInitialize(engine: Game) {
-    this.add(this.player);
+    uiManager.hud.show();
+
+    this.add(this._player);
 
     // TOP
     this.add(
@@ -86,17 +92,34 @@ export class GameZone extends Scene {
       this.spawnMangas(new Manga());
     }, 20000);
 
+    this.createSpawnTimer(() => {
+      this.spawnFruitIces(new FruitIce());
+    }, 15000);
+
+    this.createSpawnTimer(() => {
+      this.spawnPantsu(new Pantsu());
+    }, 12500);
+
     this._difficultyTimer = new Timer({
       fcn: () => {
-        if (engine.points < 50) {
-          this._enemy.addDifficulty(engine, Math.sin(engine.points / 50));
+        if (engine.points < 100) {
+          this._enemy.addDifficulty(engine, Math.sin(engine.points / 100));
         }
       },
+      repeats: true,
       interval: 10000
     });
 
     this.addTimer(this._difficultyTimer);
     this._difficultyTimer.start();
+  }
+
+  public get player() {
+    return this._player;
+  }
+
+  public get enemy() {
+    return this._enemy;
   }
 
   createSpawnTimer(spawnFcn: () => void, interval: number) {
@@ -129,6 +152,8 @@ export class GameZone extends Scene {
 
   spawnHoles = this.createSpawnFunction('hole', 7);
   spawnVodkas = this.createSpawnFunction('vodka', 3);
-  spawnPears = this.createSpawnFunction('pear', 5);
+  spawnPears = this.createSpawnFunction('pear', 10);
   spawnMangas = this.createSpawnFunction('manga', 1);
+  spawnFruitIces = this.createSpawnFunction('fruitIce', 1);
+  spawnPantsu = this.createSpawnFunction('pantsu', 1);
 }

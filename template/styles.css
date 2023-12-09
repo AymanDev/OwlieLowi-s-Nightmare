@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 
 body {
   margin: 0;
 
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Pixelify Sans', sans-serif;
 }
 
 .container {
@@ -68,7 +68,6 @@ canvas {
   max-height: 1080px;
 
   display: flex;
-
 }
 
 .loading {
@@ -109,6 +108,10 @@ canvas {
   border-radius: 46px;
 
   transition: opacity 0.5s ease;
+
+  cursor: pointer;
+
+  font-family: 'Pixelify Sans', sans-serif;
 }
 
 .buttonContainer:hover #playBtn {
@@ -122,36 +125,88 @@ canvas {
   pointer-events: none;
 }
 
-.center {
-  margin: 12px auto 0;
-
-  display: grid;
-  grid-template-columns: repeat(2, 140px);
-  gap: 20px;
-
-  max-height: 40px;
+.left {
+  display: flex;
+  flex-direction: column;
 }
 
-.center .bar {
+.left > div {
+  margin-top: 12px;
+  margin-left: 12px;
+}
+
+.center {
+  margin: 12px auto 0;
+}
+
+.speed {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 20px;
+}
+
+.speed .bar {
   position: static;
 }
 
 .bar {
-  position: absolute;
   min-width: 100px;
-  padding: 10px;
+  padding: 15px;
 
   background: rgba(0, 0, 0, 0.5);
   color: white;
 
-  border-radius: 36px;
-
   display: flex;
   justify-content: center;
   align-items: center;
+
+  font-size: 20px;
+}
+
+.pixelBorder {
+  clip-path: polygon(
+    0px calc(100% - 20px),
+    4px calc(100% - 20px),
+    4px calc(100% - 12px),
+    8px calc(100% - 12px),
+    8px calc(100% - 8px),
+    12px calc(100% - 8px),
+    12px calc(100% - 4px),
+    20px calc(100% - 4px),
+    20px 100%,
+    calc(100% - 20px) 100%,
+    calc(100% - 20px) calc(100% - 4px),
+    calc(100% - 12px) calc(100% - 4px),
+    calc(100% - 12px) calc(100% - 8px),
+    calc(100% - 8px) calc(100% - 8px),
+    calc(100% - 8px) calc(100% - 12px),
+    calc(100% - 4px) calc(100% - 12px),
+    calc(100% - 4px) calc(100% - 20px),
+    100% calc(100% - 20px),
+    100% 20px,
+    calc(100% - 4px) 20px,
+    calc(100% - 4px) 12px,
+    calc(100% - 8px) 12px,
+    calc(100% - 8px) 8px,
+    calc(100% - 12px) 8px,
+    calc(100% - 12px) 4px,
+    calc(100% - 20px) 4px,
+    calc(100% - 20px) 0px,
+    20px 0px,
+    20px 4px,
+    12px 4px,
+    12px 8px,
+    8px 8px,
+    8px 12px,
+    4px 12px,
+    4px 20px,
+    0px 20px
+  );
 }
 
 #points {
+  position: absolute;
+
   right: 12px;
   top: 12px;
 }
@@ -165,6 +220,25 @@ canvas {
   margin-left: 4px;
 }
 
+#horny {
+  min-width: 512px;
+
+  margin-top: 20px;
+
+  border: 3px solid rgb(203, 103, 182);
+
+  height: 50px;
+}
+
+#horny .value {
+  width: 0;
+
+  background: rgba(243, 77, 207, 0.514);
+  margin-left: 0;
+
+  height: 100%;
+}
+
 .hide {
-  display: none;
+  display: none !important;
 }

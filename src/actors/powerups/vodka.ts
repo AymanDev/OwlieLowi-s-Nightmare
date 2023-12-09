@@ -1,9 +1,9 @@
-import { Actor, Random, Shape, Trigger, vec } from 'excalibur';
-import { Resources } from '../../resources';
-import { Game } from '../..';
-import { getRandomPositionWithinPlayableSpace } from '../../scenes/gamezone/gamezone.utils';
+import { Actor, Shape, Trigger, vec } from 'excalibur';
 
-const rand = new Random();
+
+import { Game } from '../../game';
+import { Resources } from '../../resources';
+import { getRandomPositionWithinPlayableSpace, getRandomRotation } from '../../scenes/gamezone/gamezone.utils';
 
 export class Vodka extends Actor {
   constructor() {
@@ -15,7 +15,7 @@ export class Vodka extends Actor {
   }
 
   onInitialize(engine: Game): void {
-    this.rotation = rand.integer(0, 100) / 100;
+    this.rotation = getRandomRotation();
 
     this.addChild(
       new Trigger({
@@ -26,7 +26,10 @@ export class Vodka extends Actor {
         target: engine.player,
 
         action: () => {
-          Resources.VodkaSound.play(1);
+          if (!Resources.VodkaSound.isPlaying()) {
+            Resources.VodkaSound.play(0.6);
+          }
+          Resources.CollectSfx.play(0.25);
 
           engine.player.damage(10);
           engine.player.speedModificator += 0.1;

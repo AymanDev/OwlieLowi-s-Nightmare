@@ -1,6 +1,7 @@
-import { Actor, ActorArgs, Color, Engine, Rectangle, Trigger, vec } from 'excalibur';
+import { Actor, ActorArgs, Color, Rectangle, Trigger, vec } from 'excalibur';
+
+import { Game } from '../../game';
 import { getRandomPositionWithinPlayableSpace } from '../../scenes/gamezone/gamezone.utils';
-import { Game } from '../..';
 
 const WIDTH = 32;
 const HEIGHT = 32;

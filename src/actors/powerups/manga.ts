@@ -1,7 +1,9 @@
 import { Actor, Random, Trigger, vec } from 'excalibur';
-import { getRandomPositionWithinPlayableSpace } from '../../scenes/gamezone/gamezone.utils';
+
+
+import { Game } from '../../game';
 import { Resources } from '../../resources';
-import { Game } from '../..';
+import { getRandomPositionWithinPlayableSpace, getRandomRotation } from '../../scenes/gamezone/gamezone.utils';
 
 const SIZE = 64;
 
@@ -13,6 +15,8 @@ export class Manga extends Actor {
   }
 
   onInitialize(engine: Game): void {
+    this.rotation = getRandomRotation();
+
     this.graphics.use(Resources.MangaImage.toSprite());
 
     this.addChild(
@@ -29,9 +33,12 @@ export class Manga extends Actor {
           } else {
             Resources.MangaSoundAlt.play(1);
           }
+          Resources.CollectSfx.play(0.25);
 
-          engine.player.heal(25);
+          engine.points += 1;
 
+          engine.player.heal(35);
+          engine.player.horny += 25;
           this.kill();
         }
       })
