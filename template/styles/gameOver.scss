@@ -24,14 +24,13 @@
     margin-bottom: 120px;
   }
 
-  #restart {
+  .button {
     margin-top: 20px;
 
     font-size: 32px;
 
     padding: 20px;
 
-    background: rgba(0, 255, 128, 0.5);
     border: none;
     color: white;
 
@@ -42,5 +41,15 @@
     &:hover {
       opacity: 0.75;
     }
+  }
+
+  #restart {
+    background: rgba(0, 255, 128, 0.5);
+  }
+
+  #return {
+    margin-top: 64px;
+
+    background: rgba(255, 32, 32, 0.5);
   }
 }

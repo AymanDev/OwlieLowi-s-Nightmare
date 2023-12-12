@@ -22,7 +22,7 @@ export class Hud extends BaseUi {
   }
 
   public updateHealthUI(health: number) {
-    healthText.textContent = health.toString();
+    healthText.textContent = health.toFixed(0);
   }
 
   public updateSpeedUI(speed: number) {

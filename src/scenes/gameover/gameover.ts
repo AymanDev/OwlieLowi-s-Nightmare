@@ -9,6 +9,7 @@ export class GameOver extends Scene {
     Resources.GameOverSfx.play(1);
 
     uiManager.gameOver.addRestartButtonListener(() => this.onRestart(engine));
+    uiManager.gameOver.addReturnButtonListener(() => this.onReturn(engine));
   }
 
   onActivate(context: SceneActivationContext<unknown>): void {
@@ -23,5 +24,12 @@ export class GameOver extends Scene {
     uiManager.gameOver.hide();
 
     engine.restart();
+  }
+
+  onReturn(engine: Game) {
+    uiManager.gameOver.hide();
+
+    engine.resetGameData();
+    engine.goToScene('mainmenu');
   }
 }

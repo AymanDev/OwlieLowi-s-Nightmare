@@ -156,6 +156,6 @@ export class BonkGraphics extends Actor {
   }
 
   onInitialize(_engine: Game): void {
-    this.graphics.use(Resources.ActorChat.toSprite());
+    this.graphics.use(Resources.ActorChatUlti.toSprite());
   }
 }

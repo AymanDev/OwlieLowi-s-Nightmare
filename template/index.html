@@ -40,11 +40,58 @@
           <div id="gameOver" class="hide">
             <h1 class="title">Вы проиграли!</h1>
             <div class="points">Очков: <span class="value">0</span></div>
-            <button id="restart" class="pixelBorder">Перезапустить</button>
+            <button id="restart" class="button pixelBorder">Перезапустить</button>
+            <button id="return" class="button pixelBorder">Вернуться в главное меню</button>
+          </div>
+
+          <div id="guide" class="hide">
+            <div class="container">
+              <h1 class="title">Обучение</h1>
+
+              <div class="entry">
+                <img src="https://korekuta.ru/static/minigames/project231231/static-images/items/fruit_ice.png" alt="" />
+                <p>"Как сосать?!" - лечит на 10, уменьшает замедление на 0.01 и дает 2 очка</p>
+              </div>
+
+              <div class="entry">
+                <img src="https://korekuta.ru/static/minigames/project231231/static-images/items/pantsu.png" alt="" />
+                <p>"Где ты там трусики видел?!" - дает 20 очков, увеличивает скорость и замедление на 0.2 и увеличивает хорни на 10</p>
+              </div>
+
+              <div class="entry">
+                <img src="https://korekuta.ru/static/minigames/project231231/static-images/items/manga.png" alt="" />
+                <p>"Капец через нее проходят?!" - лечит на 35, увеличивает хорни на 25 и дает 1 очко</p>
+              </div>
+
+              <div class="entry">
+                <img src="https://korekuta.ru/static/minigames/project231231/static-images/items/pear.png" alt="" />
+                <p>Груша - лечит на 2, уменьшает хорни на 1, увеличивает ускорение и замедление на 0.1 и дает 1 очко</p>
+              </div>
+
+              <div class="entry">
+                <img src="https://korekuta.ru/static/minigames/project231231/static-images/items/vodka.png" alt="" />
+                <p>"Чики брики!" - наносит 10 урона и увеличивает скорость на 0.1</p>
+              </div>
+
+              <h3 class="gameplay">Описание</h3>
+              <div class="desc">
+                <p>Управление на WASD, прыжок в текущем направление SHIFT.</p>
+                <p>
+                  Полоска хорни заполняется сверху, при ее достижении максимума начнет снижаться ускорение и замедление! Полоску можно
+                  уменьшить получив урон или собирать соответствующие предметы!
+                </p>
+                <p>
+                  Суть собрать как можно больше очков, чем больше очков - тем сложнее процесс. Предметы станут появляться чаще. Атаки будут
+                  чаще, двигаться и менять направление тоже!
+                </p>
+              </div>
+
+              <button class="startBtn pixelBorder">Играть</button>
+            </div>
           </div>
 
           <div class="buttonContainer">
-            <button id="playBtn" class="pixelBorder">Играть</button>
+            <button id="playBtn" class="pixelBorder">Загрузить игру...</button>
           </div>
         </div>
         <canvas id="game"></canvas>

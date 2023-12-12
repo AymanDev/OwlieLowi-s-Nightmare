@@ -1,4 +1,5 @@
 import { GameOverScreen } from './gameover';
+import { Guide } from './guide';
 import { Hud } from './hud';
 import { Preload } from './preload';
 
@@ -8,6 +9,8 @@ class UIManager {
   private _hud = new Hud();
 
   private _gameOver = new GameOverScreen();
+
+  private _guide = new Guide();
 
   public get hud() {
     return this._hud;
@@ -19,6 +22,10 @@ class UIManager {
 
   public get gameOver() {
     return this._gameOver;
+  }
+
+  public get guide() {
+    return this._guide;
   }
 }
 

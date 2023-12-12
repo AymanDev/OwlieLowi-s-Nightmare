@@ -1,5 +1,6 @@
-import { Actor, CollisionType, Color, Engine, Keys, Logger, Random, Shape, vec } from 'excalibur';
+import { Actor, CollisionType, Color, Engine, Keys, Logger, Random, Shape, Timer, vec } from 'excalibur';
 
+import { idleAnimation, walkDownAnimation, walkLeftAnimation, walkRightAnimation, walkUpAnimation } from './player.animations';
 import { playerCollisionGroup } from '../../collision-groups';
 import { Game } from '../../game';
 import { Resources } from '../../resources';
@@ -21,6 +22,8 @@ export class Player extends Actor {
   private _horny = 0;
   private _isInHornyMode = false;
 
+  private _isDashAvailable = true;
+
   constructor() {
     super({
       pos: vec(1280 / 2, 720 / 2),
@@ -28,9 +31,11 @@ export class Player extends Actor {
       height: 80,
       color: new Color(0, 0, 0),
 
-      collider: Shape.Box(80, 80),
+      collider: Shape.Box(20, 20, vec(0.5, -0.5)),
       collisionType: CollisionType.Active,
-      collisionGroup: playerCollisionGroup
+      collisionGroup: playerCollisionGroup,
+
+      z: 10
     });
   }
 
@@ -79,7 +84,7 @@ export class Player extends Actor {
     this.dragModificator = 1;
     this.horny = 0;
 
-    this.graphics.use(Resources.ActorMain.toSprite());
+    this.graphics.use(idleAnimation);
     uiManager.hud.updateHealthUI(this.health);
   }
 
@@ -118,6 +123,7 @@ export class Player extends Actor {
 
     this.applyDrag();
     this.updateInputs(engine);
+    this.updateAnimations();
 
     if (Math.abs(this.vel.x) > 0 || Math.abs(this.vel.y) > 0) {
       if (!Resources.FootstepSfx.isPlaying()) {
@@ -134,11 +140,20 @@ export class Player extends Actor {
         uiManager.hud.hideHornyWarning();
       }
 
+      // this.damage(0.001);
+      if (this.speedModificator > 1) {
+        this.speedModificator -= 0.001;
+      }
+
+      if (this.dragModificator > 1) {
+        this._dragModificator -= 0.001;
+      }
+
       return;
     }
 
     if (this.horny < 100) {
-      this.horny += 0.05;
+      this.horny += 0.025;
       return;
     }
 
@@ -172,29 +187,89 @@ export class Player extends Actor {
 
     const keys = [Keys.W, Keys.A, Keys.S, Keys.D];
 
-    if (keys.some((key) => engine.input.keyboard.isHeld(key))) {
-      if (engine.input.keyboard.isHeld(Keys.W)) {
-        yVel -= SPEED;
-      }
-
-      if (engine.input.keyboard.isHeld(Keys.S)) {
-        yVel += SPEED;
-      }
-
-      if (engine.input.keyboard.isHeld(Keys.A)) {
-        xVel -= SPEED;
-      }
-
-      if (engine.input.keyboard.isHeld(Keys.D)) {
-        xVel += SPEED;
-      }
-
-      xVel *= this.speedModificator;
-      yVel *= this.speedModificator;
-
-      this.vel.x = xVel;
-      this.vel.y = yVel;
+    if (!keys.some((key) => engine.input.keyboard.isHeld(key))) {
+      return;
     }
+
+    if (engine.input.keyboard.isHeld(Keys.W)) {
+      yVel -= SPEED;
+    }
+
+    if (engine.input.keyboard.isHeld(Keys.S)) {
+      yVel += SPEED;
+    }
+
+    if (engine.input.keyboard.isHeld(Keys.A)) {
+      xVel -= SPEED;
+    }
+
+    if (engine.input.keyboard.isHeld(Keys.D)) {
+      xVel += SPEED;
+    }
+
+    if (Math.abs(yVel) > 0) {
+      xVel *= this.speedModificator / 1.5;
+    } else {
+      xVel *= this.speedModificator;
+    }
+
+    if (Math.abs(xVel) > 0) {
+      yVel *= this.speedModificator / 1.5;
+    } else {
+      yVel *= this.speedModificator;
+    }
+
+    if (this._isDashAvailable && engine.input.keyboard.isHeld(Keys.ShiftLeft)) {
+      if (Math.abs(xVel) > 0) {
+        xVel *= 20;
+      }
+
+      if (Math.abs(yVel) > 0) {
+        yVel *= 20;
+      }
+
+      this._isDashAvailable = false;
+
+      const dashTimer = new Timer({
+        fcn: () => {
+          this._isDashAvailable = true;
+        },
+        interval: 2000
+      });
+
+      engine.currentScene.addTimer(dashTimer);
+
+      dashTimer.start();
+
+      Resources.DashSfx.play(1);
+    }
+
+    this.vel.x = xVel;
+    this.vel.y = yVel;
+  }
+
+  updateAnimations() {
+    if (this.vel.x > 0) {
+      this.graphics.use(walkRightAnimation);
+      return;
+    }
+
+    if (this.vel.x < 0) {
+      this.graphics.use(walkLeftAnimation);
+      return;
+    }
+
+    if (this.vel.y > 0) {
+      this.graphics.use(walkDownAnimation);
+      return;
+    }
+
+    if (this.vel.y < 0) {
+      this.graphics.use(walkUpAnimation);
+      return;
+    }
+
+    this.graphics.use(idleAnimation);
   }
 
   onDead(engine: Game) {

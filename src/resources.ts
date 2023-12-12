@@ -1,7 +1,9 @@
 import { ImageSource, Sound } from 'excalibur';
 
 import actorChat from './images/actor/actor_chat.png';
+import actorChatUlti from './images/actor/actor_chat_ulti.png';
 import actorMain from './images/actor/actor_main.png';
+import actorMainSpriteSheet from './images/actor/actor_main_spritesheet.png';
 import fruitIceImage from './images/items/fruit_ice.png';
 import mangaImage from './images/items/manga.png';
 import pantsuImage from './images/items/pantsu.png';
@@ -19,6 +21,7 @@ import pantsuSound from './sounds/powerups/pantsu.wav';
 import vodkaSound from './sounds/powerups/vodka_powerup.wav';
 import alarmSfx from './sounds/sfx/alarm.wav';
 import collectSound from './sounds/sfx/collect.wav';
+import dashSfx from './sounds/sfx/dash.wav';
 import footstepSfx from './sounds/sfx/footstep.wav';
 
 /**
@@ -27,7 +30,10 @@ import footstepSfx from './sounds/sfx/footstep.wav';
  */
 const Resources = {
   ActorMain: new ImageSource(actorMain),
+  ActorMainSpriteSheet: new ImageSource(actorMainSpriteSheet),
+
   ActorChat: new ImageSource(actorChat),
+  ActorChatUlti: new ImageSource(actorChatUlti),
 
   MainMenuThemeMusic: new Sound(mainMenuMusic),
   GamePlayMusic: new Sound(gamePlayMusic),
@@ -41,6 +47,7 @@ const Resources = {
   GameOverSfx: new Sound(gameOverSound),
   FootstepSfx: new Sound(footstepSfx),
   AlarmSfx: new Sound(alarmSfx),
+  DashSfx: new Sound(dashSfx),
 
   // Items
   VodkaImage: new ImageSource(vodkaImage),

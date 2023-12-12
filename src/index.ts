@@ -19,7 +19,6 @@ uiManager.preload.addPlayButtonClickListener(() => {
     uiManager.preload.hide();
 
     // Resources.MainThemeMusic.volume = 0.1;
-    Resources.GameStartSound.play(0.5);
     // Resources.MainThemeMusic.play(0.01);
     // Resources.MainThemeMusic.on('playbackend', () => {
     // Resources.MainThemeMusic.play(0.1);

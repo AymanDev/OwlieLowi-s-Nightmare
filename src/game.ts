@@ -42,13 +42,17 @@ export class Game extends Engine {
     return super.start(loader);
   }
 
-  public restart() {
+  public resetGameData() {
     this.points = 0;
 
     this.remove(this._gameZone);
     this._gameZone = new GameZone();
 
     this.add('gamezone', this._gameZone);
+  }
+
+  public restart() {
+    this.resetGameData();
 
     this.goToScene('gamezone');
   }

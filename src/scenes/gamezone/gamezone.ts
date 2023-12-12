@@ -35,8 +35,10 @@ export class GameZone extends Scene {
   private _currentDifficulty = 1;
 
   public onInitialize(engine: Game) {
+    Resources.GameStartSound.play(0.5);
+
     Resources.GamePlayMusic.stop();
-    Resources.GamePlayMusic.play(0.15);
+    Resources.GamePlayMusic.play(0.09);
 
     this._currentDifficulty = 1;
 
@@ -99,14 +101,14 @@ export class GameZone extends Scene {
     this._difficultyTimer = new Timer({
       fcn: () => {
         if (engine.points < 100) {
-          this._currentDifficulty += Math.sin(engine.points / 100);
+          this._currentDifficulty += Math.sin(engine.points / 75);
 
           this.enemy.updateTimers(engine);
           this.updateSpawnTimers();
         }
       },
       repeats: true,
-      interval: 21000
+      interval: 30000
     });
 
     this.addTimer(this._difficultyTimer);
@@ -186,7 +188,7 @@ export class GameZone extends Scene {
       //   return;
       // }
 
-      const activeTimer = this._activeTimers[type];
+      // const activeTimer = this._activeTimers[type];
       // activeTimer.complete
 
       this.cancelTimer(this._activeTimers[type]);
