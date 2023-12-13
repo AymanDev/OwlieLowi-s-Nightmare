@@ -30,7 +30,7 @@ export class Game extends Engine {
 
   public start() {
     this._mainMenu = new MainMenu();
-    this._gameZone = new GameZone();
+    this._gameZone = new GameZone(this);
     this._gameOver = new GameOver();
 
     this.add('mainmenu', this._mainMenu);
@@ -46,7 +46,7 @@ export class Game extends Engine {
     this.points = 0;
 
     this.remove(this._gameZone);
-    this._gameZone = new GameZone();
+    this._gameZone = new GameZone(this);
 
     this.add('gamezone', this._gameZone);
   }

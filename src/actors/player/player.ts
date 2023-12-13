@@ -1,5 +1,7 @@
 import { Actor, CollisionType, Color, Engine, Keys, Logger, Random, Shape, Timer, vec } from 'excalibur';
 
+import { BubbleWrapEffect } from './effects/bubble-wrap-effect';
+import { Effect } from './effects/effect';
 import { idleAnimation, walkDownAnimation, walkLeftAnimation, walkRightAnimation, walkUpAnimation } from './player.animations';
 import { playerCollisionGroup } from '../../collision-groups';
 import { Game } from '../../game';
@@ -24,7 +26,11 @@ export class Player extends Actor {
 
   private _isDashAvailable = true;
 
-  constructor() {
+  // private _isInvulnerable = false;
+  // private _vulnerabiltyTimer: Timer;
+  private _activeEffects: Effect[] = [];
+
+  constructor(private _engine: Game) {
     super({
       pos: vec(1280 / 2, 720 / 2),
       width: 80,
@@ -88,7 +94,53 @@ export class Player extends Actor {
     uiManager.hud.updateHealthUI(this.health);
   }
 
+  getEffectIndexByName(name: string) {
+    return this._activeEffects.findIndex((e) => e.name === name);
+  }
+
+  getEffectIndex(effect: Effect) {
+    return this.getEffectIndexByName(effect.name);
+  }
+
+  getEffect(effect: Effect) {
+    const idx = this.getEffectIndex(effect);
+
+    if (idx === -1) {
+      return undefined;
+    }
+
+    return this._activeEffects[idx];
+  }
+
+  addEffect(effect: Effect) {
+    const existingEffect = this.getEffect(effect);
+
+    if (existingEffect) {
+      existingEffect.resetCooldown();
+
+      return;
+    }
+
+    effect.start(this._engine);
+
+    this._activeEffects.push(effect);
+  }
+
+  removeEffect(effect: Effect) {
+    const existingEffectIdx = this.getEffectIndex(effect);
+
+    if (existingEffectIdx === -1) {
+      return;
+    }
+
+    this._activeEffects = this._activeEffects.filter((_, idx) => idx !== existingEffectIdx);
+  }
+
   damage(damage: number) {
+    if (this.getEffectIndexByName(BubbleWrapEffect.EFFECT_NAME) !== -1) {
+      return;
+    }
+
     if (damage > 0) {
       if (!Resources.EekSfx.isPlaying()) {
         Resources.EekSfx.playbackRate = rand.floating(0.9, 1.1);

@@ -3,6 +3,7 @@ import { Actor, CollisionType, EdgeCollider, Logger, Scene, SceneActivationConte
 import { Bonk } from '../../actors/damage-zones/bonk';
 import { Hole } from '../../actors/damage-zones/hole';
 import { Player } from '../../actors/player/player';
+import { BubbleWrap } from '../../actors/powerups/bubble-wrap';
 import { FruitIce } from '../../actors/powerups/fruit-ice';
 import { Manga } from '../../actors/powerups/manga';
 import { Pantsu } from '../../actors/powerups/pantsu';
@@ -16,7 +17,7 @@ export const WIDTH = 1280;
 export const HEIGHT = 720;
 export const SCENE_PADDING = 70;
 
-const mapKeys = ['hole', 'vodka', 'pear', 'manga', 'fruitIce', 'pantsu'] as const;
+const mapKeys = ['hole', 'vodka', 'pear', 'manga', 'fruitIce', 'pantsu', 'bubble-wrap'] as const;
 
 export type ObjectOnMapKey = (typeof mapKeys)[number];
 
@@ -29,10 +30,16 @@ export class GameZone extends Scene {
   private _activeTimers: ActiveTimers = {};
 
   private _enemy = new Bonk();
-  private _player = new Player();
+  private _player: Player;
 
   private _difficultyTimer: Timer;
   private _currentDifficulty = 1;
+
+  constructor(private _engine: Game) {
+    super();
+
+    this._player = new Player(_engine);
+  }
 
   public onInitialize(engine: Game) {
     Resources.GameStartSound.play(0.5);
@@ -177,20 +184,18 @@ export class GameZone extends Scene {
       },
       Math.max(7500, 12500 / this.currentDifficulty)
     );
+
+    this.createSpawnTimer(
+      'bubble-wrap',
+      () => {
+        this.spawnBubbleWraps(new BubbleWrap());
+      },
+      Math.max(20000, 28000 / this.currentDifficulty)
+    );
   }
 
   createSpawnTimer(type: ObjectOnMapKey, spawnFcn: () => void, interval: number) {
     if (this._activeTimers[type]) {
-      // // Timer has not completed atleast once
-      // if (this._objectsOnMap[type] === 0) {
-      //   Logger.getInstance().info('Cant create timer', type, 'it does not spawned once');
-
-      //   return;
-      // }
-
-      // const activeTimer = this._activeTimers[type];
-      // activeTimer.complete
-
       this.cancelTimer(this._activeTimers[type]);
     }
 
@@ -233,4 +238,5 @@ export class GameZone extends Scene {
   spawnMangas = this.createSpawnFunction('manga', 1);
   spawnFruitIces = this.createSpawnFunction('fruitIce', 1);
   spawnPantsu = this.createSpawnFunction('pantsu', 1);
+  spawnBubbleWraps = this.createSpawnFunction('bubble-wrap', 1);
 }

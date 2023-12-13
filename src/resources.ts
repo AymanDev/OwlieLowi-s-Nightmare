@@ -4,6 +4,7 @@ import actorChat from './images/actor/actor_chat.png';
 import actorChatUlti from './images/actor/actor_chat_ulti.png';
 import actorMain from './images/actor/actor_main.png';
 import actorMainSpriteSheet from './images/actor/actor_main_spritesheet.png';
+import bubbleWrapImage from './images/items/bubble_wrap.png';
 import fruitIceImage from './images/items/fruit_ice.png';
 import mangaImage from './images/items/manga.png';
 import pantsuImage from './images/items/pantsu.png';
@@ -23,6 +24,7 @@ import alarmSfx from './sounds/sfx/alarm.wav';
 import collectSound from './sounds/sfx/collect.wav';
 import dashSfx from './sounds/sfx/dash.wav';
 import footstepSfx from './sounds/sfx/footstep.wav';
+import protectionSfx from './sounds/sfx/protection.wav';
 
 /**
  * Default global resource dictionary. This gets loaded immediately
@@ -48,6 +50,7 @@ const Resources = {
   FootstepSfx: new Sound(footstepSfx),
   AlarmSfx: new Sound(alarmSfx),
   DashSfx: new Sound(dashSfx),
+  ProtectionSfx: new Sound(protectionSfx),
 
   // Items
   VodkaImage: new ImageSource(vodkaImage),
@@ -63,7 +66,9 @@ const Resources = {
   FruitIceSound: new Sound(fruitIceSound),
 
   PantsuImage: new ImageSource(pantsuImage),
-  PantsuSound: new Sound(pantsuSound)
+  PantsuSound: new Sound(pantsuSound),
+
+  BubbleWrapImage: new ImageSource(bubbleWrapImage)
 };
 
 export { Resources };
