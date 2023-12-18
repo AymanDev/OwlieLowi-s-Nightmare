@@ -1,4 +1,4 @@
-import { Actor, CollisionType, EdgeCollider, Logger, Scene, SceneActivationContext, Timer, vec } from 'excalibur';
+import { Actor, CollisionType, EdgeCollider, Logger, Scene, SceneActivationContext, Timer, Vector, vec } from 'excalibur';
 
 import { Bonk } from '../../actors/damage-zones/bonk';
 import { Hole } from '../../actors/damage-zones/hole';
@@ -35,13 +35,15 @@ export class GameZone extends Scene {
   private _difficultyTimer: Timer;
   private _currentDifficulty = 1;
 
-  constructor(private _engine: Game) {
+  constructor(engine: Game) {
     super();
 
-    this._player = new Player(_engine);
+    this._player = new Player(engine);
   }
 
   public onInitialize(engine: Game) {
+    this.setupBackground(engine);
+
     Resources.GameStartSound.play(0.5);
 
     Resources.GamePlayMusic.stop();
@@ -71,7 +73,7 @@ export class GameZone extends Scene {
     this.add(
       new Actor({
         pos: vec(0, 0),
-        collider: new EdgeCollider({ begin: vec(0, 200), end: vec(WIDTH, 200) }),
+        collider: new EdgeCollider({ begin: vec(0, 320), end: vec(WIDTH, 320) }),
         collisionType: CollisionType.Fixed
       })
     );
@@ -239,4 +241,26 @@ export class GameZone extends Scene {
   spawnFruitIces = this.createSpawnFunction('fruitIce', 1);
   spawnPantsu = this.createSpawnFunction('pantsu', 1);
   spawnBubbleWraps = this.createSpawnFunction('bubble-wrap', 1);
+
+  setupBackground(engine: Game) {
+    const actor = new Actor({
+      x: 0,
+      y: 0,
+
+      width: engine.screen.resolution.width,
+      height: engine.screen.resolution.height,
+      collisionType: CollisionType.PreventCollision
+    });
+
+    actor.z = -99;
+    actor.graphics.anchor = Vector.Zero;
+
+    const sprite = Resources.BackgroundImage.toSprite();
+    sprite.destSize.width = engine.screen.resolution.width;
+    sprite.destSize.height = engine.screen.resolution.height;
+
+    actor.graphics.use(sprite);
+
+    this.add(actor);
+  }
 }

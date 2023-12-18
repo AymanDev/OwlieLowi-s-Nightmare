@@ -3,6 +3,8 @@ import { BaseUi, ui } from './ui';
 const hud = ui.querySelector('#hud');
 
 const pointsText = hud.querySelector('#points > .value');
+const bottlesText = hud.querySelector('#bottles > .value');
+
 const healthText = hud.querySelector('#health > .value');
 
 const speedText = hud.querySelector('#speed > .value');
@@ -35,6 +37,10 @@ export class Hud extends BaseUi {
 
   public updateHornyValueUI(horny: number) {
     hornyValueElement.style.width = `${horny}%`;
+  }
+
+  public updateBottlesValueUI(bottles: number) {
+    bottlesText.textContent = `${bottles.toFixed(2)} л`;
   }
 
   public showHornyWarning() {

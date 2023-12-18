@@ -2,7 +2,14 @@ import { Actor, CollisionType, Color, Engine, Keys, Logger, Random, Shape, Timer
 
 import { BubbleWrapEffect } from './effects/bubble-wrap-effect';
 import { Effect } from './effects/effect';
-import { idleAnimation, walkDownAnimation, walkLeftAnimation, walkRightAnimation, walkUpAnimation } from './player.animations';
+import {
+  drinkAnimation,
+  idleAnimation,
+  walkDownAnimation,
+  walkLeftAnimation,
+  walkRightAnimation,
+  walkUpAnimation
+} from './player.animations';
 import { playerCollisionGroup } from '../../collision-groups';
 import { Game } from '../../game';
 import { Resources } from '../../resources';
@@ -26,9 +33,11 @@ export class Player extends Actor {
 
   private _isDashAvailable = true;
 
-  // private _isInvulnerable = false;
-  // private _vulnerabiltyTimer: Timer;
   private _activeEffects: Effect[] = [];
+
+  private _isDrinking = false;
+  private _isDrinkingAnimationStarted = false;
+  private _drinksAvailable = 1;
 
   constructor(private _engine: Game) {
     super({
@@ -45,6 +54,16 @@ export class Player extends Actor {
     });
   }
 
+  public get drinksAvailable() {
+    return this._drinksAvailable;
+  }
+
+  public set drinksAvailable(value: number) {
+    this._drinksAvailable = value;
+
+    uiManager.hud.updateBottlesValueUI(this._drinksAvailable);
+  }
+
   public get speedModificator() {
     return this._speedModificator;
   }
@@ -52,7 +71,11 @@ export class Player extends Actor {
   public set speedModificator(value: number) {
     this._speedModificator = value;
 
-    uiManager.hud.updateSpeedUI(value);
+    if (this._speedModificator < 1) {
+      this._speedModificator = 1;
+    }
+
+    uiManager.hud.updateSpeedUI(this._speedModificator);
   }
 
   public get dragModificator() {
@@ -62,7 +85,11 @@ export class Player extends Actor {
   public set dragModificator(value: number) {
     this._dragModificator = value;
 
-    uiManager.hud.updateDragUI(value);
+    if (this._dragModificator < 1) {
+      this._dragModificator = 1;
+    }
+
+    uiManager.hud.updateDragUI(this._dragModificator);
   }
 
   public get horny() {
@@ -89,6 +116,7 @@ export class Player extends Actor {
     this.speedModificator = 1;
     this.dragModificator = 1;
     this.horny = 0;
+    this.drinksAvailable = 1;
 
     this.graphics.use(idleAnimation);
     uiManager.hud.updateHealthUI(this.health);
@@ -148,6 +176,9 @@ export class Player extends Actor {
       }
 
       this.horny -= 1;
+
+      // this.actions.blink(100, 75, 5);
+      this.actions.fade(0, 100).fade(1, 100);
     }
 
     this.health -= damage;
@@ -173,14 +204,35 @@ export class Player extends Actor {
 
     this.updateHorny();
 
+    this.updateDrinking();
+
+    this.updateAnimations();
+
     this.applyDrag();
     this.updateInputs(engine);
-    this.updateAnimations();
 
     if (Math.abs(this.vel.x) > 0 || Math.abs(this.vel.y) > 0) {
       if (!Resources.FootstepSfx.isPlaying()) {
         Resources.FootstepSfx.playbackRate = rand.floating(0.5, 1.5);
         Resources.FootstepSfx.play(0.08);
+      }
+    }
+  }
+
+  updateDrinking() {
+    if (this._isDrinking) {
+      if (!this._isDrinkingAnimationStarted) {
+        this.heal(25);
+        this.speedModificator -= 2;
+        this.dragModificator -= 2;
+
+        this.vel.x = 0;
+        this.vel.y = 0;
+      }
+
+      if (drinkAnimation.currentFrameIndex === 7) {
+        this._isDrinking = false;
+        this._isDrinkingAnimationStarted = false;
       }
     }
   }
@@ -198,7 +250,7 @@ export class Player extends Actor {
       }
 
       if (this.dragModificator > 1) {
-        this._dragModificator -= 0.001;
+        this.dragModificator -= 0.001;
       }
 
       return;
@@ -236,6 +288,16 @@ export class Player extends Actor {
   updateInputs(engine: Engine) {
     let xVel = 0;
     let yVel = 0;
+
+    if (this._isDrinking) {
+      return;
+    }
+
+    if (engine.input.keyboard.isHeld(Keys.Space) && this._drinksAvailable > 0) {
+      this.drinksAvailable -= 1;
+      this._isDrinking = true;
+      return;
+    }
 
     const keys = [Keys.W, Keys.A, Keys.S, Keys.D];
 
@@ -301,6 +363,15 @@ export class Player extends Actor {
   }
 
   updateAnimations() {
+    if (this._isDrinking) {
+      if (!this._isDrinkingAnimationStarted) {
+        this._isDrinkingAnimationStarted = true;
+
+        this.graphics.use(drinkAnimation);
+      }
+      return;
+    }
+
     if (this.vel.x > 0) {
       this.graphics.use(walkRightAnimation);
       return;

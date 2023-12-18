@@ -4,6 +4,7 @@ import actorChat from './images/actor/actor_chat.png';
 import actorChatUlti from './images/actor/actor_chat_ulti.png';
 import actorMain from './images/actor/actor_main.png';
 import actorMainSpriteSheet from './images/actor/actor_main_spritesheet.png';
+import backgroundImage from './images/background.png';
 import bubbleWrapImage from './images/items/bubble_wrap.png';
 import fruitIceImage from './images/items/fruit_ice.png';
 import mangaImage from './images/items/manga.png';
@@ -31,6 +32,8 @@ import protectionSfx from './sounds/sfx/protection.wav';
  * and holds available assets for the game.
  */
 const Resources = {
+  BackgroundImage: new ImageSource(backgroundImage),
+
   ActorMain: new ImageSource(actorMain),
   ActorMainSpriteSheet: new ImageSource(actorMainSpriteSheet),
 

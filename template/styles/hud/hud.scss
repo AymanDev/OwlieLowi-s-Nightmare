@@ -20,6 +20,11 @@
 }
 
 .right {
+  display: flex;
+  flex-direction: column;
+}
+
+.right > div {
   margin-top: 12px;
   margin-right: 12px;
 }

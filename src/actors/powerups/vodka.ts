@@ -1,6 +1,5 @@
 import { Actor, Shape, Trigger, vec } from 'excalibur';
 
-
 import { Game } from '../../game';
 import { Resources } from '../../resources';
 import { getRandomPositionWithinPlayableSpace, getRandomRotation } from '../../scenes/gamezone/gamezone.utils';
@@ -33,6 +32,8 @@ export class Vodka extends Actor {
 
           engine.player.damage(10);
           engine.player.speedModificator += 0.1;
+
+          engine.player.drinksAvailable += 0.5;
 
           this.kill();
         }

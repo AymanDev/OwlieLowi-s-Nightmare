@@ -13,7 +13,7 @@
         <div id="ui" class="loading">
           <div id="hud" class="hide">
             <div class="left">
-              <div id="health" class="bar pixelBorder">Здоровья: <span class="value">100</span></div>
+              <div id="health" class="bar pixelBorder">Здоровье: <span class="value">100</span></div>
               <div id="speed" class="bar pixelBorder">Ускорение: <span class="value">1</span></div>
               <div id="drag" class="bar pixelBorder">Замедление: <span class="value">1</span></div>
             </div>
@@ -27,6 +27,7 @@
 
             <div class="right">
               <div id="points" class="bar pixelBorder">Очков: <span class="value">0</span></div>
+              <div id="bottles" class="bar pixelBorder">Бутылочек: <span class="value">0</span></div>
             </div>
 
             <div id="hornyWarning" class="hide">
@@ -37,11 +38,27 @@
             </div>
           </div>
 
+          <div id="mainMenu" class="hide">
+            <div class="container">
+              <h1 class="title">OwlieLowi's Nightmare</h1>
+              <h3 class="target">Нужно собрать: <span class="value">128</span></h3>
+
+              <button class="play button pixelBorder">Начать играть</button>
+              <button class="guide button pixelBorder">Обучение</button>
+            </div>
+          </div>
+
           <div id="gameOver" class="hide">
             <h1 class="title">Вы проиграли!</h1>
             <div class="points">Очков: <span class="value">0</span></div>
             <button id="restart" class="button pixelBorder">Перезапустить</button>
             <button id="return" class="button pixelBorder">Вернуться в главное меню</button>
+          </div>
+
+          <div id="gameWin" class="hide">
+            <h1 class="title">Вы выиграли!</h1>
+            <div class="points">Очков: <span class="value">0</span></div>
+            <button class="return button pixelBorder">Вернуться в главное меню</button>
           </div>
 
           <div id="guide" class="hide">
@@ -70,12 +87,21 @@
 
               <div class="entry">
                 <img src="https://korekuta.ru/static/minigames/project231231/static-images/items/vodka.png" alt="" />
-                <p>"Чики брики!" - наносит 10 урона и увеличивает скорость на 0.1</p>
+                <p>"Чики брики!" - наносит 10 урона, увеличивает скорость на 0.1 и дает 0.5л бутылочки</p>
+              </div>
+
+              <div class="entry">
+                <img src="https://korekuta.ru/static/minigames/project231231/static-images/items/bubble_wrap.png" alt="" />
+                <p>Пупырка - дает неуязвимость ко всему урону на 2 секунды</p>
               </div>
 
               <h3 class="gameplay">Описание</h3>
               <div class="desc">
                 <p>Управление на WASD, прыжок в текущем направление SHIFT.</p>
+                <p>
+                  Бутылочку можно использовать, только, если есть минимум 1л. Ее использование восстанавливает 25 здоровья и снижает
+                  ускорение с замедлением на 2.
+                </p>
                 <p>
                   Полоска хорни заполняется сверху, при ее достижении максимума начнет снижаться ускорение и замедление! Полоску можно
                   уменьшить получив урон или собирать соответствующие предметы!
@@ -84,9 +110,10 @@
                   Суть собрать как можно больше очков, чем больше очков - тем сложнее процесс. Предметы станут появляться чаще. Атаки будут
                   чаще, двигаться и менять направление тоже!
                 </p>
+                <p>Каждую победу количеству очков, которые нужно набрать будет увеличиваться на 25% от собранных очков!</p>
               </div>
 
-              <button class="startBtn pixelBorder">Играть</button>
+              <button class="backBtn pixelBorder">Вернуться назад</button>
             </div>
           </div>
 

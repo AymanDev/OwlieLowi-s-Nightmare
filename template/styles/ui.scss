@@ -21,6 +21,8 @@ button {
   align-items: center;
 
   overflow: hidden;
+
+  object-fit: contain;
 }
 
 .background {
@@ -39,18 +41,12 @@ button {
 }
 
 .wrapper {
-  flex: 1;
-
   position: relative;
+  width: calc(100vh * 1.7);
 
-  aspect-ratio: 16/9;
-
+  aspect-ratio: 1920 / 1080;
   max-width: 1920px;
   max-height: 1080px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   overflow: hidden;
 }
@@ -58,6 +54,10 @@ button {
 canvas {
   width: 100% !important;
   height: 100% !important;
+
+  object-fit: contain;
+
+  aspect-ratio: 16 / 9;
 }
 
 #ui {
@@ -71,6 +71,8 @@ canvas {
   max-height: 1080px;
 
   display: flex;
+
+  pointer-events: all;
 }
 
 .pixelBorder {
@@ -114,6 +116,13 @@ canvas {
   );
 }
 
+@import './playBtn.scss';
+@import './hud/hud.scss';
+@import './gameOver.scss';
+@import './guide.scss';
+@import './gameWin.scss';
+@import './mainMenu.scss';
+
 .loading {
   backdrop-filter: blur(20px);
 
@@ -125,7 +134,8 @@ canvas {
   display: none !important;
 }
 
-@import './playBtn.scss';
-@import './hud/hud.scss';
-@import './gameOver.scss';
-@import './guide.scss';
+.disabled {
+  pointer-events: none;
+
+  cursor: not-allowed;
+}
