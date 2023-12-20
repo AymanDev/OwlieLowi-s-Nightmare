@@ -42,7 +42,7 @@ button {
 
 .wrapper {
   position: relative;
-  width: calc(100vh * 1.7);
+  width: calc(100vh * 1.78);
 
   aspect-ratio: 1920 / 1080;
   max-width: 1920px;
@@ -114,6 +114,18 @@ canvas {
     4px 20px,
     0px 20px
   );
+}
+
+.button {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+
+  transition: all 0.5s ease;
+
+  &:not(.disabled):hover {
+    opacity: 0.75;
+  }
 }
 
 @import './playBtn.scss';

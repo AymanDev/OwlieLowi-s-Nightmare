@@ -13,8 +13,10 @@ import pearImage from './images/items/pear.png';
 import vodkaImage from './images/items/vodka.png';
 import eekSfx from './sounds/eek_sfx.wav';
 import gameOverSound from './sounds/gameover.wav';
+import gameWinSfx from './sounds/gamewin.wav';
 import gamePlayMusic from './sounds/music/gameplay.wav';
 import gameStartSound from './sounds/music/gamestart.wav';
+import gameWinMusic from './sounds/music/gamewin.wav';
 import mainMenuMusic from './sounds/music/mainmenu.wav';
 import fruitIceSound from './sounds/powerups/fruit_ice.wav';
 import mangaSound from './sounds/powerups/manga_powerup.wav';
@@ -46,6 +48,9 @@ const Resources = {
   GameStartSound: new Sound(gameStartSound),
 
   CollectSfx: new Sound(collectSound),
+
+  GameWinSfx: new Sound(gameWinSfx),
+  GameWinMusic: new Sound(gameWinMusic),
 
   // SFX
   EekSfx: new Sound(eekSfx),

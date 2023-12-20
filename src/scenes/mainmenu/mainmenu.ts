@@ -1,6 +1,8 @@
 import { Scene, SceneActivationContext } from 'excalibur';
 
 import { Game } from '../../game';
+import { getLastSavedTarget } from '../../progression';
+import { Resources } from '../../resources';
 import { uiManager } from '../../ui/ui-manager';
 
 export class MainMenu extends Scene {
@@ -12,13 +14,18 @@ export class MainMenu extends Scene {
   }
 
   onActivate(_context: SceneActivationContext<unknown>): void {
+    Resources.MainMenuThemeMusic.play(0.1);
+
     uiManager.mainMenu.show();
+    uiManager.mainMenu.updateTargetValueUI(getLastSavedTarget());
   }
 
   handlePlayBtn(engine: Game) {
+    Resources.MainMenuThemeMusic.stop();
+
     uiManager.mainMenu.hide();
 
-    engine.goToScene('gamezone');
+    engine.restart();
   }
 
   handleEnterGuideBtn() {

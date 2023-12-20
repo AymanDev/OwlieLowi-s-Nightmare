@@ -1,4 +1,4 @@
-import { Actor, CollisionType, EdgeCollider, Logger, Scene, SceneActivationContext, Timer, Vector, vec } from 'excalibur';
+import { Actor, CollisionType, EdgeCollider, Engine, Logger, Scene, SceneActivationContext, Timer, Vector, vec } from 'excalibur';
 
 import { Bonk } from '../../actors/damage-zones/bonk';
 import { Hole } from '../../actors/damage-zones/hole';
@@ -91,7 +91,7 @@ export class GameZone extends Scene {
     this.add(
       new Actor({
         pos: vec(0, 0),
-        collider: new EdgeCollider({ begin: vec(WIDTH, 0), end: vec(WIDTH, HEIGHT - SCENE_PADDING) }),
+        collider: new EdgeCollider({ begin: vec(WIDTH, 0), end: vec(WIDTH, HEIGHT) }),
         collisionType: CollisionType.Fixed
       })
     );
@@ -262,5 +262,13 @@ export class GameZone extends Scene {
     actor.graphics.use(sprite);
 
     this.add(actor);
+  }
+
+  update(engine: Game, delta: number): void {
+    super.update(engine, delta);
+
+    if (engine.points >= engine.target) {
+      engine.goToScene('gamewin');
+    }
   }
 }

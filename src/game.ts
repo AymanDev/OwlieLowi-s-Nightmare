@@ -1,7 +1,9 @@
 import { DisplayMode, Engine, Loader } from 'excalibur';
 
+import { getLastSavedTarget } from './progression';
 import { Resources } from './resources';
 import { GameOver } from './scenes/gameover/gameover';
+import { GameWin } from './scenes/gamewin/gamewin';
 import { GameZone } from './scenes/gamezone/gamezone';
 import { MainMenu } from './scenes/mainmenu/mainmenu';
 import { uiManager } from './ui/ui-manager';
@@ -10,6 +12,7 @@ export class Game extends Engine {
   private _mainMenu: MainMenu;
   private _gameZone: GameZone;
   private _gameOver: GameOver;
+  private _gameWin: GameWin;
 
   private _points = 0;
 
@@ -32,10 +35,12 @@ export class Game extends Engine {
     this._mainMenu = new MainMenu();
     this._gameZone = new GameZone(this);
     this._gameOver = new GameOver();
+    this._gameWin = new GameWin();
 
     this.add('mainmenu', this._mainMenu);
     this.add('gamezone', this._gameZone);
     this.add('gameover', this._gameOver);
+    this.add('gamewin', this._gameWin);
 
     const loader = new Loader(Object.values(Resources));
 
@@ -77,5 +82,9 @@ export class Game extends Engine {
 
   public get gameZone() {
     return this._gameZone;
+  }
+
+  public get target() {
+    return getLastSavedTarget();
   }
 }

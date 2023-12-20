@@ -21,19 +21,13 @@
 #playBtn {
   margin: auto;
 
-  appearance: none;
-
   background: rgba(0, 255, 128, 0.5);
   color: white;
 
   padding: 40px;
   font-size: 50px;
 
-  border: none;
-
   transition: opacity 0.5s ease;
-
-  cursor: pointer;
 
   font-family: 'Press Start 2P', sans-serif;
 }

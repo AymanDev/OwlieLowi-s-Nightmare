@@ -40,11 +40,22 @@
 
           <div id="mainMenu" class="hide">
             <div class="container">
-              <h1 class="title">OwlieLowi's Nightmare</h1>
+              <h1 class="title">
+                <span>OwlieLowi's Nightmare</span>
+                <p class="memeSign">
+                  Terraria и Minecraft<br />
+                  уже так умеют (╥_╥)
+                </p>
+              </h1>
               <h3 class="target">Нужно собрать: <span class="value">128</span></h3>
 
               <button class="play button pixelBorder">Начать играть</button>
               <button class="guide button pixelBorder">Обучение</button>
+
+              <div class="footer">
+                Created by <a href="https://korekuta.ru" class="link">KingoSawada</a>. Art by
+                <a href="https://kwork.ru/user/Pavel_Nick" class="link" id="href">Pavel_Nick</a>.
+              </div>
             </div>
           </div>
 
@@ -58,6 +69,8 @@
           <div id="gameWin" class="hide">
             <h1 class="title">Вы выиграли!</h1>
             <div class="points">Очков: <span class="value">0</span></div>
+            <div class="target">Следующая цель: <span class="value">0</span></div>
+            <button class="continue button pixelBorder">Продолжить</button>
             <button class="return button pixelBorder">Вернуться в главное меню</button>
           </div>
 
@@ -113,12 +126,12 @@
                 <p>Каждую победу количеству очков, которые нужно набрать будет увеличиваться на 25% от собранных очков!</p>
               </div>
 
-              <button class="backBtn pixelBorder">Вернуться назад</button>
+              <button class="backBtn button pixelBorder">Вернуться назад</button>
             </div>
           </div>
 
           <div class="buttonContainer">
-            <button id="playBtn" class="pixelBorder">Загрузить игру...</button>
+            <button id="playBtn" class="button pixelBorder">Загрузить игру...</button>
           </div>
         </div>
         <canvas id="game"></canvas>
