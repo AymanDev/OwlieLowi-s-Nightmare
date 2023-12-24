@@ -110,6 +110,10 @@ export class Player extends Actor {
     uiManager.hud.updateHornyValueUI(this._horny);
   }
 
+  public get isInHornyMode() {
+    return this._isInHornyMode;
+  }
+
   onInitialize() {
     this.isDead = false;
     this.health = 100;

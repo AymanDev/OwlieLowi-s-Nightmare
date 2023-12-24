@@ -1,11 +1,11 @@
 import { Random, vec } from 'excalibur';
 
-import { HEIGHT, SCENE_PADDING, WIDTH } from './gamezone';
+import { SCENE_HEIGHT, SCENE_PADDING, SCENE_WIDTH } from './gamezone';
 
 const rand = new Random();
 
 export const getRandomPositionWithinPlayableSpace = () => {
-  return vec(rand.integer(SCENE_PADDING, WIDTH - SCENE_PADDING), rand.integer(350, HEIGHT - SCENE_PADDING));
+  return vec(rand.integer(SCENE_PADDING, SCENE_WIDTH - SCENE_PADDING), rand.integer(350, SCENE_HEIGHT - SCENE_PADDING));
 };
 
 export const getRandomRotation = () => {

@@ -1,6 +1,6 @@
 import { Actor, CollisionType, EdgeCollider, Engine, Logger, Scene, SceneActivationContext, Timer, Vector, vec } from 'excalibur';
 
-import { Bonk } from '../../actors/damage-zones/bonk';
+import { Enemy } from '../../actors/damage-zones/enemy/enemy';
 import { Hole } from '../../actors/damage-zones/hole';
 import { Player } from '../../actors/player/player';
 import { BubbleWrap } from '../../actors/powerups/bubble-wrap';
@@ -13,8 +13,8 @@ import { Game } from '../../game';
 import { Resources } from '../../resources';
 import { uiManager } from '../../ui/ui-manager';
 
-export const WIDTH = 1280;
-export const HEIGHT = 720;
+export const SCENE_WIDTH = 1280;
+export const SCENE_HEIGHT = 720;
 export const SCENE_PADDING = 70;
 
 const mapKeys = ['hole', 'vodka', 'pear', 'manga', 'fruitIce', 'pantsu', 'bubble-wrap'] as const;
@@ -29,7 +29,7 @@ export class GameZone extends Scene {
   private _objectsOnMap: ObjectsOnMap;
   private _activeTimers: ActiveTimers = {};
 
-  private _enemy = new Bonk();
+  private _enemy: Enemy;
   private _player: Player;
 
   private _difficultyTimer: Timer;
@@ -38,6 +38,7 @@ export class GameZone extends Scene {
   constructor(engine: Game) {
     super();
 
+    this._enemy = new Enemy();
     this._player = new Player(engine);
   }
 
@@ -65,7 +66,7 @@ export class GameZone extends Scene {
     this.add(
       new Actor({
         pos: vec(0, 0),
-        collider: new EdgeCollider({ begin: vec(0, 0), end: vec(WIDTH, 0) }),
+        collider: new EdgeCollider({ begin: vec(0, 0), end: vec(SCENE_WIDTH, 0) }),
         collisionType: CollisionType.Fixed
       })
     );
@@ -73,7 +74,7 @@ export class GameZone extends Scene {
     this.add(
       new Actor({
         pos: vec(0, 0),
-        collider: new EdgeCollider({ begin: vec(0, 320), end: vec(WIDTH, 320) }),
+        collider: new EdgeCollider({ begin: vec(0, 320), end: vec(SCENE_WIDTH, 320) }),
         collisionType: CollisionType.Fixed
       })
     );
@@ -82,7 +83,7 @@ export class GameZone extends Scene {
     this.add(
       new Actor({
         pos: vec(0, 0),
-        collider: new EdgeCollider({ begin: vec(0, HEIGHT - 0), end: vec(WIDTH, HEIGHT - 0) }),
+        collider: new EdgeCollider({ begin: vec(0, SCENE_HEIGHT - 0), end: vec(SCENE_WIDTH, SCENE_HEIGHT - 0) }),
         collisionType: CollisionType.Fixed
       })
     );
@@ -91,7 +92,7 @@ export class GameZone extends Scene {
     this.add(
       new Actor({
         pos: vec(0, 0),
-        collider: new EdgeCollider({ begin: vec(WIDTH, 0), end: vec(WIDTH, HEIGHT) }),
+        collider: new EdgeCollider({ begin: vec(SCENE_WIDTH, 0), end: vec(SCENE_WIDTH, SCENE_HEIGHT) }),
         collisionType: CollisionType.Fixed
       })
     );
@@ -100,7 +101,7 @@ export class GameZone extends Scene {
     this.add(
       new Actor({
         pos: vec(0, 0),
-        collider: new EdgeCollider({ begin: vec(0, 0), end: vec(0, HEIGHT) }),
+        collider: new EdgeCollider({ begin: vec(0, 0), end: vec(0, SCENE_HEIGHT) }),
         collisionType: CollisionType.Fixed
       })
     );

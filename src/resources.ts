@@ -4,6 +4,9 @@ import actorChat from './images/actor/actor_chat.png';
 import actorChatUlti from './images/actor/actor_chat_ulti.png';
 import actorMain from './images/actor/actor_main.png';
 import actorMainSpriteSheet from './images/actor/actor_main_spritesheet.png';
+import enemyIdleSpriteSheet from './images/actor/enemy/enemy_idle.png';
+import enemyShowupSpriteSheet from './images/actor/enemy/enemy_showup.png';
+import enemyPawAttackSpriteSheet from './images/actor/enemy/paw_attack.png';
 import backgroundImage from './images/background.png';
 import bubbleWrapImage from './images/items/bubble_wrap.png';
 import fruitIceImage from './images/items/fruit_ice.png';
@@ -76,7 +79,11 @@ const Resources = {
   PantsuImage: new ImageSource(pantsuImage),
   PantsuSound: new Sound(pantsuSound),
 
-  BubbleWrapImage: new ImageSource(bubbleWrapImage)
+  BubbleWrapImage: new ImageSource(bubbleWrapImage),
+
+  EnemyIdleSpriteSheet: new ImageSource(enemyIdleSpriteSheet),
+  EnemyPawAttackSpriteSheet: new ImageSource(enemyPawAttackSpriteSheet),
+  EnemyShowupSpriteSheet: new ImageSource(enemyShowupSpriteSheet)
 };
 
 export { Resources };

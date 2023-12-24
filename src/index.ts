@@ -1,5 +1,6 @@
 import '../template/styles/ui.scss';
 
+import {DevTool} from '@excaliburjs/dev-tools';
 import { Physics, vec } from 'excalibur';
 
 import { Game } from './game';
@@ -20,3 +21,9 @@ uiManager.preload.addPlayButtonClickListener(() => {
     uiManager.preload.hide();
   });
 });
+
+const query = new URLSearchParams(window.location.search);
+
+if (query.get('debug')){
+  const devtool = new DevTool(game);
+}
