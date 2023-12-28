@@ -26,7 +26,7 @@ export class Pantsu extends Actor {
         pos: vec(0, 0),
 
         action: () => {
-          Resources.PantsuSound.play(1);
+          Resources.PantsuSound.play(1.25);
           Resources.CollectSfx.play(0.1);
 
           engine.points += 20;

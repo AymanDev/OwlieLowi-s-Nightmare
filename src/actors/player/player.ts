@@ -205,7 +205,7 @@ export class Player extends Actor {
     if (damage > 0) {
       if (!Resources.EekSfx.isPlaying()) {
         Resources.EekSfx.playbackRate = rand.floating(0.9, 1.1);
-        Resources.EekSfx.play(1);
+        Resources.EekSfx.play(1.25);
       }
 
       this.horny -= 1;
@@ -401,7 +401,7 @@ export class Player extends Actor {
       this._dashTimer = new Timer({
         fcn: () => {
           this._isDashAvailable = true;
-          Resources.UiNeutralNotificationSfx.play();
+          Resources.UiNeutralNotificationSfx.play(0.25);
         },
         interval: 2000
       });

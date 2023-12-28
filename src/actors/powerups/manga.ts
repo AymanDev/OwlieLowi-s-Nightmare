@@ -31,7 +31,7 @@ export class Manga extends Actor {
           if (rand.integer(0, 100) > 50) {
             Resources.MangaSound.play(1);
           } else {
-            Resources.MangaSoundAlt.play(1);
+            Resources.MangaSoundAlt.play(1.25);
           }
           Resources.CollectSfx.play(0.1);
 
