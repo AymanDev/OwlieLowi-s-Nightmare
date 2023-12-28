@@ -11,6 +11,8 @@ const guideBtn = mainMenuScreen.querySelector<HTMLButtonElement>('.guide');
 
 const creditsBtn = mainMenuScreen.querySelector<HTMLButtonElement>('.credits');
 
+const memeSignEl = mainMenuScreen.querySelector<HTMLDivElement>('.memeSign');
+
 export class MainMenuScreen extends BaseUi {
   constructor() {
     super(mainMenuScreen);
@@ -38,5 +40,17 @@ export class MainMenuScreen extends BaseUi {
 
   updateTargetValueUI(value: number) {
     targetValue.textContent = value.toString();
+  }
+
+  addMemeSignClickListener(callback: () => void) {
+    memeSignEl.onclick = () => {
+      Resources.UiPositiveSfx.play();
+
+      callback();
+    };
+  }
+
+  updateMemeSignText(text: string) {
+    memeSignEl.innerHTML = text;
   }
 }

@@ -46,10 +46,10 @@
 
   @keyframes pulsate {
     from {
-      transform: rotateZ(-25deg) scale(1);
+      transform: rotateZ(-15deg) scale(1);
     }
     to {
-      transform: rotateZ(-35deg) scale(1.4);
+      transform: rotateZ(-25deg) scale(1.4);
     }
   }
 
@@ -58,12 +58,21 @@
     top: 20px;
     right: -150px;
 
+    text-shadow:
+      2px 2px 0 #000,
+      -2px 2px 0 #000,
+      -2px -2px 0 #000,
+      2px -2px 0 #000;
+
     font-size: 16px;
+    line-height: 18px;
 
     color: rgb(202, 200, 38);
 
     animation: pulsate 2s alternate infinite;
     animation-timing-function: linear;
+
+    cursor: pointer;
   }
 
   .target {
