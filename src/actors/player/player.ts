@@ -1,17 +1,4 @@
-import {
-  Actor,
-  CollisionStartEvent,
-  CollisionType,
-  Color,
-  EmitterType,
-  Engine,
-  Keys,
-  Logger,
-  Random,
-  Shape,
-  Timer,
-  vec
-} from 'excalibur';
+import { Actor, CollisionStartEvent, CollisionType, Color, EmitterType, Engine, Keys, Logger, Random, Shape, Timer, vec } from 'excalibur';
 
 import { BubbleWrapEffect } from './effects/bubble-wrap-effect';
 import { Effect } from './effects/effect';
@@ -245,6 +232,18 @@ export class Player extends Actor {
     if (this.health <= 0) {
       this.onDead(engine);
       return;
+    }
+
+    if (engine.input.keyboard.isHeld(Keys.ShiftLeft)) {
+      uiManager.hud.pressShiftKey();
+    } else {
+      uiManager.hud.unpressShiftKey();
+    }
+
+    if (engine.input.keyboard.isHeld(Keys.Space)) {
+      uiManager.hud.pressSpacebarKey();
+    } else {
+      uiManager.hud.unpressSpacebarKey();
     }
 
     if (this._dashTimer) {

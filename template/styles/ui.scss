@@ -134,12 +134,16 @@ canvas {
 @import './guide.scss';
 @import './gameWin.scss';
 @import './mainMenu.scss';
+@import './credits.scss';
 
 .loading {
   backdrop-filter: blur(20px);
 
-  background: rgb(2, 0, 36);
-  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+  background: url('https://korekuta.ru/static/minigames/project231231/static-images/preload-bg.png');
+  background-size: cover;
+  // filter: blur(5px);
+  // background: rgb(2, 0, 36);
+  // background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
 }
 
 .hide {

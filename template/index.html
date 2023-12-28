@@ -21,6 +21,7 @@
                   <p>Прыжок:</p>
                   <div class="pixelBorder bar value ready"></div>
                 </div>
+                <div class="key"></div>
               </div>
             </div>
 
@@ -34,6 +35,7 @@
             <div class="right">
               <div id="points" class="bar pixelBorder">Очков: <span class="value">0</span></div>
               <div id="bottles" class="bar pixelBorder">Бутылочек: <span class="value">0</span></div>
+              <div class="key"></div>
             </div>
 
             <div id="hornyWarning" class="hide">
@@ -58,11 +60,9 @@
 
                 <button class="play button pixelBorder">Начать играть</button>
                 <button class="guide button pixelBorder">Обучение</button>
+                <button class="credits button pixelBorder">Благодарности</button>
 
-                <div class="footer">
-                  Created by <a href="https://korekuta.ru" class="link">KingoSawada</a>. Art by
-                  <a href="https://kwork.ru/user/pavel_nick?ref=10508934" class="link" id="href">Pavel_Nick</a>.
-                </div>
+                <div class="footer">Created by <a href="https://korekuta.ru" class="link" target="_blank">KingoSawada</a></div>
               </div>
             </div>
           </div>
@@ -118,10 +118,10 @@
 
               <h3 class="gameplay">Описание</h3>
               <div class="desc">
-                <p>Управление на WASD, прыжок в текущем направление SHIFT.</p>
+                <p>Управление на WASD, прыжок в текущем направление SHIFT. Прыжок убивает врагов на пути игрока!</p>
                 <p>
-                  Бутылочку можно использовать, только, если есть минимум 1л. Ее использование восстанавливает 25 здоровья, понижает хорни на 15 и снижает
-                  ускорение с замедлением на 2.
+                  Бутылочку можно использовать, только, если есть минимум 1л. Ее использование восстанавливает 25 здоровья, понижает хорни
+                  на 15 и снижает ускорение с замедлением на 2.
                 </p>
                 <p>
                   Полоска хорни заполняется сверху, при ее достижении максимума начнет снижаться ускорение и замедление! Полоску можно
@@ -133,7 +133,21 @@
                 </p>
                 <p>Каждую победу количеству очков, которые нужно набрать будет увеличиваться на 25% от собранных очков!</p>
               </div>
-              
+
+              <button class="backBtn button pixelBorder">Вернуться назад</button>
+            </div>
+          </div>
+
+          <div id="credits" class="hide">
+            <div class="container">
+              <h1 class="title">Благодарности</h1>
+              <p class="subtitle">Эти люди помогли на заказ или бесплатно выкладывая свои работы, сделать игру за короткий срок!</p>
+              <div class="entry">
+                <a href="https://kwork.ru/user/pavel_nick?ref=10508934" class="link" target="_blank">Pavel_Nick</a> - Арт Owlie, фон и кот
+              </div>
+              <div class="entry"><a href="https://beamedeighth.itch.io/" target="_blank">beamedeighth</a> - SimpleKeys</div>
+              <div class="entry"><a href="https://kronbits.itch.io/" target="_blank">kronbits</a> - 200 Free SFX</div>
+
               <button class="backBtn button pixelBorder">Вернуться назад</button>
             </div>
           </div>

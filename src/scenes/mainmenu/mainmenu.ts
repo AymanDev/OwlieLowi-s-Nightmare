@@ -11,6 +11,9 @@ export class MainMenu extends Scene {
 
     uiManager.mainMenu.addGuideBtnClickListener(() => this.handleEnterGuideBtn());
     uiManager.guide.addListenerToExitBtn(() => this.handleExitGuideBtn());
+
+    uiManager.mainMenu.addCreditsBtnClicklistener(() => this.handleCreditsBtn());
+    uiManager.credits.addReturnButtonListener(() => this.handleExitCreditsBtn());
   }
 
   onActivate(_context: SceneActivationContext<unknown>): void {
@@ -35,6 +38,16 @@ export class MainMenu extends Scene {
 
   handleExitGuideBtn() {
     uiManager.guide.hide();
+    uiManager.mainMenu.show();
+  }
+
+  handleCreditsBtn() {
+    uiManager.mainMenu.hide();
+    uiManager.credits.show();
+  }
+
+  handleExitCreditsBtn() {
+    uiManager.credits.hide();
     uiManager.mainMenu.show();
   }
 }

@@ -16,6 +16,10 @@ const hornyWarningEl = hud.querySelector('#hornyWarning');
 
 const dashEl = hud.querySelector<HTMLDivElement>('#dash .value');
 
+const shiftEl = hud.querySelector('#dash > .key');
+
+const spacebarEl = hud.querySelector('.right > .key');
+
 export class Hud extends BaseUi {
   constructor() {
     super(hud);
@@ -64,5 +68,21 @@ export class Hud extends BaseUi {
     if (percentage <= 99 && dashEl.classList.contains('ready')) {
       dashEl.classList.remove('ready');
     }
+  }
+
+  public pressShiftKey() {
+    shiftEl.classList.add('pressed');
+  }
+
+  public unpressShiftKey() {
+    shiftEl.classList.remove('pressed');
+  }
+
+  public pressSpacebarKey() {
+    spacebarEl.classList.add('pressed');
+  }
+
+  public unpressSpacebarKey() {
+    spacebarEl.classList.remove('pressed');
   }
 }

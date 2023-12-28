@@ -1,3 +1,4 @@
+import { CreditsUI } from './credits';
 import { GameOverScreen } from './gameover';
 import { GameWinScreen } from './gamewin';
 import { Guide } from './guide';
@@ -18,6 +19,8 @@ class UIManager {
   private _gameWin = new GameWinScreen();
 
   private _mainMenu = new MainMenuScreen();
+
+  private _credits = new CreditsUI();
 
   public get hud() {
     return this._hud;
@@ -41,6 +44,10 @@ class UIManager {
 
   public get mainMenu() {
     return this._mainMenu;
+  }
+
+  public get credits() {
+    return this._credits;
   }
 }
 

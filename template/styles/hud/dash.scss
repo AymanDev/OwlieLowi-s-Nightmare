@@ -1,8 +1,29 @@
 #dash {
+  position: relative;
+
   margin-top: auto;
   margin-bottom: 12px;
 
   opacity: 0.75;
+
+  .key {
+    position: absolute;
+    top: -30px;
+    left: calc(50% - 22px);
+
+    width: 44px;
+    height: 16px;
+
+    image-rendering: pixelated;
+
+    transform: scale(2);
+
+    background: url('https://korekuta.ru/static/minigames/project231231/static-images/ui/keys/SHIFT.png') 0 0;
+
+    &.pressed {
+      background-position: 44px 0;
+    }
+  }
 
   .bar {
     display: flex;

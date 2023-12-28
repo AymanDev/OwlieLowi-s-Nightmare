@@ -9,6 +9,8 @@ const playBtn = mainMenuScreen.querySelector<HTMLButtonElement>('.play');
 
 const guideBtn = mainMenuScreen.querySelector<HTMLButtonElement>('.guide');
 
+const creditsBtn = mainMenuScreen.querySelector<HTMLButtonElement>('.credits');
+
 export class MainMenuScreen extends BaseUi {
   constructor() {
     super(mainMenuScreen);
@@ -20,6 +22,14 @@ export class MainMenuScreen extends BaseUi {
 
   addGuideBtnClickListener(callback: () => void) {
     guideBtn.onclick = () => {
+      Resources.UiPositiveSfx.play();
+
+      callback();
+    };
+  }
+
+  addCreditsBtnClicklistener(callback: () => void) {
+    creditsBtn.onclick = () => {
       Resources.UiPositiveSfx.play();
 
       callback();

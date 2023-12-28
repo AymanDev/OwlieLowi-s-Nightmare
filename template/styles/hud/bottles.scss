@@ -1,0 +1,22 @@
+.right {
+  position: relative;
+
+  .key {
+    position: absolute;
+    top: 120px;
+    left: calc(50% - 33.5px);
+
+    width: 67px;
+    height: 16px;
+
+    image-rendering: pixelated;
+
+    transform: scale(2);
+
+    background: url('https://korekuta.ru/static/minigames/project231231/static-images/ui/keys/SPACEALTERNATIVE.png') 0 0;
+
+    &.pressed {
+      background-position: 67px 0;
+    }
+  }
+}

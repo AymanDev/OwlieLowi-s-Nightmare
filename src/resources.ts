@@ -19,6 +19,8 @@ import mangaImage from './images/items/manga.png';
 import pantsuImage from './images/items/pantsu.png';
 import pearImage from './images/items/pear.png';
 import vodkaImage from './images/items/vodka.png';
+import shiftKeySpritesheet from './images/ui/keys/SHIFT.png';
+import spaceBarSpritesheet from './images/ui/keys/SPACEALTERNATIVE.png';
 import eekSfx from './sounds/eek_sfx.wav';
 import gameOverSound from './sounds/gameover.wav';
 import gameWinSfx from './sounds/gamewin.wav';
@@ -68,6 +70,9 @@ const Resources = {
 
   GameWinSfx: new Sound(gameWinSfx),
   GameWinMusic: new Sound(gameWinMusic),
+
+  ShiftKeySpriteSheet: new ImageSource(shiftKeySpritesheet),
+  SpacebarKeySpriteSheet: new ImageSource(spaceBarSpritesheet),
 
   // SFX
   EekSfx: new Sound(eekSfx),
