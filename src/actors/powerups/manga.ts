@@ -5,7 +5,7 @@ import { Game } from '../../game';
 import { Resources } from '../../resources';
 import { getRandomPositionWithinPlayableSpace, getRandomRotation } from '../../scenes/gamezone/gamezone.utils';
 
-const SIZE = 64;
+const SIZE = 32;
 
 const rand = new Random();
 
@@ -33,7 +33,7 @@ export class Manga extends Actor {
           } else {
             Resources.MangaSoundAlt.play(1);
           }
-          Resources.CollectSfx.play(0.25);
+          Resources.CollectSfx.play(0.1);
 
           engine.points += 1;
 

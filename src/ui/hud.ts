@@ -14,6 +14,8 @@ const hornyValueElement = hud.querySelector<HTMLDivElement>('#horny > .value');
 
 const hornyWarningEl = hud.querySelector('#hornyWarning');
 
+const dashEl = hud.querySelector<HTMLDivElement>('#dash .value');
+
 export class Hud extends BaseUi {
   constructor() {
     super(hud);
@@ -49,5 +51,18 @@ export class Hud extends BaseUi {
 
   public hideHornyWarning() {
     hornyWarningEl.classList.add('hide');
+  }
+
+  public updateDashCooldown(percentage: number) {
+    dashEl.style.width = `${percentage}%`;
+
+    if (percentage >= 100 && !dashEl.classList.contains('ready')) {
+      dashEl.classList.add('ready');
+      return;
+    }
+
+    if (percentage <= 99 && dashEl.classList.contains('ready')) {
+      dashEl.classList.remove('ready');
+    }
   }
 }

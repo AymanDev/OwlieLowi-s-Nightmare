@@ -27,7 +27,7 @@ export class Pantsu extends Actor {
 
         action: () => {
           Resources.PantsuSound.play(1);
-          Resources.CollectSfx.play(0.25);
+          Resources.CollectSfx.play(0.1);
 
           engine.points += 20;
           engine.player.speedModificator += 0.2;

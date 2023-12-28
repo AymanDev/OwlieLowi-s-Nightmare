@@ -7,7 +7,12 @@ import actorMainSpriteSheet from './images/actor/actor_main_spritesheet.png';
 import enemyIdleSpriteSheet from './images/actor/enemy/enemy_idle.png';
 import enemyShowupSpriteSheet from './images/actor/enemy/enemy_showup.png';
 import enemyPawAttackSpriteSheet from './images/actor/enemy/paw_attack.png';
+import flyDeathSpritesheet from './images/actor/fly/m11_Dead_Ground.png';
+import flyIdleSpritesheet from './images/actor/fly/m11_Idle.png';
+import abominationDeathSpritesheet from './images/actor/small_abomination/m13_Dead.png';
+import abominationIdleSpritesheet from './images/actor/small_abomination/m13_Idle.png';
 import backgroundImage from './images/background.png';
+import bananaImage from './images/items/banana.png';
 import bubbleWrapImage from './images/items/bubble_wrap.png';
 import fruitIceImage from './images/items/fruit_ice.png';
 import mangaImage from './images/items/manga.png';
@@ -17,20 +22,31 @@ import vodkaImage from './images/items/vodka.png';
 import eekSfx from './sounds/eek_sfx.wav';
 import gameOverSound from './sounds/gameover.wav';
 import gameWinSfx from './sounds/gamewin.wav';
-import gamePlayMusic from './sounds/music/gameplay.wav';
+import brokenTensionMusic from './sounds/music/Broken Tension 200BPM 3over4.wav';
+import spiritLifterMusic from './sounds/music/Spirit Lifter 172 BPM.wav';
 import gameStartSound from './sounds/music/gamestart.wav';
 import gameWinMusic from './sounds/music/gamewin.wav';
-import mainMenuMusic from './sounds/music/mainmenu.wav';
 import fruitIceSound from './sounds/powerups/fruit_ice.wav';
 import mangaSound from './sounds/powerups/manga_powerup.wav';
 import mangaSoundAlt from './sounds/powerups/manga_powerup1.wav';
 import pantsuSound from './sounds/powerups/pantsu.wav';
 import vodkaSound from './sounds/powerups/vodka_powerup.wav';
 import alarmSfx from './sounds/sfx/alarm.wav';
-import collectSound from './sounds/sfx/collect.wav';
-import dashSfx from './sounds/sfx/dash.wav';
-import footstepSfx from './sounds/sfx/footstep.wav';
+import abominationDeathSfx from './sounds/sfx/enemy/sfx_abomination_death.wav';
+import damageSfx from './sounds/sfx/enemy/sfx_damage_minor.wav';
+import flyDeathSfx from './sounds/sfx/enemy/sfx_fly_death.wav';
 import protectionSfx from './sounds/sfx/protection.wav';
+import uiNeutralNotificationSfx from './sounds/sfx/sfx_NeutralNotification2.wav';
+import gameInitSfx from './sounds/sfx/sfx_battlemenu_init.wav';
+import collectSfx from './sounds/sfx/sfx_coin_single2.wav';
+import catAttackSfx from './sounds/sfx/sfx_damaged_cute.wav';
+import failSfx from './sounds/sfx/sfx_fail3.wav';
+import footstepSfx from './sounds/sfx/sfx_footstep2.wav';
+import drinkSfx from './sounds/sfx/sfx_heal7.wav';
+import dashSfx from './sounds/sfx/sfx_sweep3.wav';
+import uiNegativeSfx from './sounds/sfx/sfx_ui_negative.wav';
+import uiPositiveSfx from './sounds/sfx/sfx_ui_positive.wav';
+import windSfx from './sounds/sfx/sfx_windy2(loop).wav';
 
 /**
  * Default global resource dictionary. This gets loaded immediately
@@ -45,12 +61,10 @@ const Resources = {
   ActorChat: new ImageSource(actorChat),
   ActorChatUlti: new ImageSource(actorChatUlti),
 
-  MainMenuThemeMusic: new Sound(mainMenuMusic),
-  GamePlayMusic: new Sound(gamePlayMusic),
+  MainMenuThemeMusic: new Sound(spiritLifterMusic),
+  GamePlayMusic: new Sound(brokenTensionMusic),
 
   GameStartSound: new Sound(gameStartSound),
-
-  CollectSfx: new Sound(collectSound),
 
   GameWinSfx: new Sound(gameWinSfx),
   GameWinMusic: new Sound(gameWinMusic),
@@ -62,6 +76,15 @@ const Resources = {
   AlarmSfx: new Sound(alarmSfx),
   DashSfx: new Sound(dashSfx),
   ProtectionSfx: new Sound(protectionSfx),
+  CollectSfx: new Sound(collectSfx),
+  GameInitSfx: new Sound(gameInitSfx),
+  WindSfx: new Sound(windSfx),
+  DrinkSfx: new Sound(drinkSfx),
+  UiPositiveSfx: new Sound(uiPositiveSfx),
+  UiNegativeSfx: new Sound(uiNegativeSfx),
+  FailSfx: new Sound(failSfx),
+  DamageSfx: new Sound(damageSfx),
+  UiNeutralNotificationSfx: new Sound(uiNeutralNotificationSfx),
 
   // Items
   VodkaImage: new ImageSource(vodkaImage),
@@ -81,9 +104,41 @@ const Resources = {
 
   BubbleWrapImage: new ImageSource(bubbleWrapImage),
 
+  BananaImage: new ImageSource(bananaImage),
+
+  // Main enemy
   EnemyIdleSpriteSheet: new ImageSource(enemyIdleSpriteSheet),
   EnemyPawAttackSpriteSheet: new ImageSource(enemyPawAttackSpriteSheet),
-  EnemyShowupSpriteSheet: new ImageSource(enemyShowupSpriteSheet)
+  EnemyShowupSpriteSheet: new ImageSource(enemyShowupSpriteSheet),
+  EnemyAttackSfx: new Sound(catAttackSfx),
+
+  // Fly enemy
+  FlyEnemyIdleSpriteSheet: new ImageSource(flyIdleSpritesheet),
+  FlyEnemyDeathSpriteSheet: new ImageSource(flyDeathSpritesheet),
+  FlyDeathSfx: new Sound(flyDeathSfx),
+
+  // Abomination enemy
+  SmallAbominationIdleSpriteSheet: new ImageSource(abominationIdleSpritesheet),
+  SmallAbominationDeathSpriteSheet: new ImageSource(abominationDeathSpritesheet),
+  SmallAbominationDeathSfx: new Sound(abominationDeathSfx)
 };
+
+// Temporary
+const VOLUME = 0.15;
+
+Resources.MainMenuThemeMusic.loop = true;
+Resources.GameInitSfx.volume = VOLUME - 0.11;
+Resources.GameStartSound.volume = VOLUME + 0.35;
+Resources.UiPositiveSfx.volume = VOLUME;
+Resources.UiNegativeSfx.volume = VOLUME;
+Resources.UiNeutralNotificationSfx.volume = VOLUME;
+Resources.WindSfx.loop = true;
+Resources.EnemyAttackSfx.playbackRate = 0.75;
+Resources.FailSfx.volume = VOLUME;
+Resources.GameWinMusic.loop = true;
+Resources.DamageSfx.volume = VOLUME;
+Resources.FlyDeathSfx.volume = VOLUME - 0.1;
+Resources.GamePlayMusic.loop = true;
+Resources.SmallAbominationDeathSfx.volume = VOLUME;
 
 export { Resources };

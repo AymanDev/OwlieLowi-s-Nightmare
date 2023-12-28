@@ -1,4 +1,5 @@
 import { BaseUi, ui } from './ui';
+import { Resources } from '../resources';
 
 const mainMenuScreen = ui.querySelector('#mainMenu');
 
@@ -18,7 +19,11 @@ export class MainMenuScreen extends BaseUi {
   }
 
   addGuideBtnClickListener(callback: () => void) {
-    guideBtn.onclick = callback;
+    guideBtn.onclick = () => {
+      Resources.UiPositiveSfx.play();
+
+      callback();
+    };
   }
 
   updateTargetValueUI(value: number) {

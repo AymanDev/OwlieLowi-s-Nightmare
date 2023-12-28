@@ -1,4 +1,5 @@
 import { BaseUi, ui } from './ui';
+import { Resources } from '../resources';
 
 const gameWinScreen = ui.querySelector('#gameWin');
 
@@ -14,11 +15,19 @@ export class GameWinScreen extends BaseUi {
   }
 
   addContinueButtonListener(callback: () => void) {
-    continueBtn.onclick = callback;
+    continueBtn.onclick = () => {
+      Resources.UiPositiveSfx.play();
+
+      callback();
+    };
   }
 
   addReturnButtonListener(callback: () => void) {
-    returnBtn.onclick = callback;
+    returnBtn.onclick = () => {
+      Resources.UiNegativeSfx.play();
+
+      callback();
+    };
   }
 
   updatePointsValueUI(value: number) {

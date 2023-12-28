@@ -13,6 +13,9 @@ export class GameOver extends Scene {
   }
 
   onActivate(context: SceneActivationContext<unknown>): void {
+    Resources.GamePlayMusic.stop();
+    Resources.FailSfx.play();
+
     const engine = context.engine as Game;
 
     uiManager.hud.hide();

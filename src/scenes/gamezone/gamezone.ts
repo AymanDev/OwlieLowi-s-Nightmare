@@ -1,14 +1,16 @@
-import { Actor, CollisionType, EdgeCollider, Engine, Logger, Scene, SceneActivationContext, Timer, Vector, vec } from 'excalibur';
+import { Actor, CollisionType, EdgeCollider, Engine, Logger, Scene, SceneActivationContext, Shape, Timer, Vector, vec } from 'excalibur';
 
-import { Enemy } from '../../actors/damage-zones/enemy/enemy';
-import { Hole } from '../../actors/damage-zones/hole';
+import { Cat } from '../../actors/damage-zones/enemy/cat';
+import { Fly } from '../../actors/enemies/fly/fly';
+import { SmallAbomination } from '../../actors/enemies/small-abominaton/small-abomination';
 import { Player } from '../../actors/player/player';
+import { Banana } from '../../actors/powerups/banana';
 import { BubbleWrap } from '../../actors/powerups/bubble-wrap';
 import { FruitIce } from '../../actors/powerups/fruit-ice';
 import { Manga } from '../../actors/powerups/manga';
 import { Pantsu } from '../../actors/powerups/pantsu';
-import { Pear } from '../../actors/powerups/pear';
 import { Vodka } from '../../actors/powerups/vodka';
+import { damageZoneCollisionGroup } from '../../collision-groups';
 import { Game } from '../../game';
 import { Resources } from '../../resources';
 import { uiManager } from '../../ui/ui-manager';
@@ -17,7 +19,7 @@ export const SCENE_WIDTH = 1280;
 export const SCENE_HEIGHT = 720;
 export const SCENE_PADDING = 70;
 
-const mapKeys = ['hole', 'vodka', 'pear', 'manga', 'fruitIce', 'pantsu', 'bubble-wrap'] as const;
+const mapKeys = ['hole', 'vodka', 'banana', 'manga', 'fruit-ice', 'pantsu', 'bubble-wrap', 'fly', 'small-abomination'] as const;
 
 export type ObjectOnMapKey = (typeof mapKeys)[number];
 
@@ -29,7 +31,7 @@ export class GameZone extends Scene {
   private _objectsOnMap: ObjectsOnMap;
   private _activeTimers: ActiveTimers = {};
 
-  private _enemy: Enemy;
+  private _enemy: Cat;
   private _player: Player;
 
   private _difficultyTimer: Timer;
@@ -38,17 +40,19 @@ export class GameZone extends Scene {
   constructor(engine: Game) {
     super();
 
-    this._enemy = new Enemy();
+    this._enemy = new Cat();
     this._player = new Player(engine);
   }
 
   public onInitialize(engine: Game) {
     this.setupBackground(engine);
 
-    Resources.GameStartSound.play(0.5);
+    Resources.GameStartSound.play();
 
     Resources.GamePlayMusic.stop();
-    Resources.GamePlayMusic.play(0.09);
+    Resources.GamePlayMusic.play(0.05);
+
+    Resources.WindSfx.play(0.01);
 
     this._currentDifficulty = 1;
 
@@ -73,17 +77,18 @@ export class GameZone extends Scene {
     // TOP
     this.add(
       new Actor({
-        pos: vec(0, 0),
-        collider: new EdgeCollider({ begin: vec(0, 320), end: vec(SCENE_WIDTH, 320) }),
-        collisionType: CollisionType.Fixed
+        pos: vec(SCENE_WIDTH / 2, 64),
+        collider: Shape.Box(SCENE_WIDTH + 512, 512),
+        collisionType: CollisionType.Fixed,
+        collisionGroup: damageZoneCollisionGroup
       })
     );
 
     // BOTTOM
     this.add(
       new Actor({
-        pos: vec(0, 0),
-        collider: new EdgeCollider({ begin: vec(0, SCENE_HEIGHT - 0), end: vec(SCENE_WIDTH, SCENE_HEIGHT - 0) }),
+        pos: vec(SCENE_WIDTH / 2, SCENE_HEIGHT + 256),
+        collider: Shape.Box(SCENE_WIDTH + 256, 512),
         collisionType: CollisionType.Fixed
       })
     );
@@ -91,8 +96,8 @@ export class GameZone extends Scene {
     // RIGHT
     this.add(
       new Actor({
-        pos: vec(0, 0),
-        collider: new EdgeCollider({ begin: vec(SCENE_WIDTH, 0), end: vec(SCENE_WIDTH, SCENE_HEIGHT) }),
+        pos: vec(SCENE_WIDTH + 256, SCENE_HEIGHT / 2),
+        collider: Shape.Box(512, SCENE_HEIGHT + 512),
         collisionType: CollisionType.Fixed
       })
     );
@@ -100,8 +105,8 @@ export class GameZone extends Scene {
     // LEFT
     this.add(
       new Actor({
-        pos: vec(0, 0),
-        collider: new EdgeCollider({ begin: vec(0, 0), end: vec(0, SCENE_HEIGHT) }),
+        pos: vec(-256, SCENE_HEIGHT / 2),
+        collider: Shape.Box(512, SCENE_HEIGHT + 512),
         collisionType: CollisionType.Fixed
       })
     );
@@ -140,18 +145,18 @@ export class GameZone extends Scene {
   }
 
   updateSpawnTimers() {
-    this.createSpawnTimer(
-      'hole',
-      () => {
-        this.spawnHoles(new Hole());
-      },
-      Math.max(500, 1500 / this.currentDifficulty)
-    );
+    // this.createSpawnTimer(
+    //   'hole',
+    //   () => {
+    //     this.spawnHoles(new Hole());
+    //   },
+    //   Math.max(500, 1500 / this.currentDifficulty)
+    // );
 
     this.createSpawnTimer(
-      'pear',
+      'banana',
       () => {
-        this.spawnPears(new Pear());
+        this.spawnBanana(new Banana());
       },
       Math.max(500, 1000 / this.currentDifficulty)
     );
@@ -173,7 +178,7 @@ export class GameZone extends Scene {
     );
 
     this.createSpawnTimer(
-      'fruitIce',
+      'fruit-ice',
       () => {
         this.spawnFruitIces(new FruitIce());
       },
@@ -194,6 +199,22 @@ export class GameZone extends Scene {
         this.spawnBubbleWraps(new BubbleWrap());
       },
       Math.max(20000, 28000 / this.currentDifficulty)
+    );
+
+    this.createSpawnTimer(
+      'fly',
+      () => {
+        this.spawnFlys(new Fly());
+      },
+      Math.max(3000, 6000 / this.currentDifficulty)
+    );
+
+    this.createSpawnTimer(
+      'small-abomination',
+      () => {
+        this.spawnSmallAbomination(new SmallAbomination());
+      },
+      Math.max(5000, 7000 / this.currentDifficulty)
     );
   }
 
@@ -235,13 +256,15 @@ export class GameZone extends Scene {
     };
   }
 
-  spawnHoles = this.createSpawnFunction('hole', 12);
+  // spawnHoles = this.createSpawnFunction('hole', 12);
   spawnVodkas = this.createSpawnFunction('vodka', 3);
-  spawnPears = this.createSpawnFunction('pear', 20);
+  spawnBanana = this.createSpawnFunction('banana', 20);
   spawnMangas = this.createSpawnFunction('manga', 1);
-  spawnFruitIces = this.createSpawnFunction('fruitIce', 1);
+  spawnFruitIces = this.createSpawnFunction('fruit-ice', 1);
   spawnPantsu = this.createSpawnFunction('pantsu', 1);
   spawnBubbleWraps = this.createSpawnFunction('bubble-wrap', 1);
+  spawnFlys = this.createSpawnFunction('fly', 4);
+  spawnSmallAbomination = this.createSpawnFunction('small-abomination', 6);
 
   setupBackground(engine: Game) {
     const actor = new Actor({

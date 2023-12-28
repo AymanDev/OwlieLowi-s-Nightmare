@@ -26,6 +26,7 @@ export class Game extends Engine {
       suppressPlayButton: true,
       antialiasing: false,
       snapToPixel: true,
+      pixelRatio: 1,
 
       maxFps: 60
     });
@@ -48,6 +49,7 @@ export class Game extends Engine {
   }
 
   public resetGameData() {
+    Resources.WindSfx.stop();
     this.points = 0;
 
     this.remove(this._gameZone);

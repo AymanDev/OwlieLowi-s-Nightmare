@@ -1,4 +1,4 @@
-import { Animation, SpriteSheet, range } from 'excalibur';
+import { Animation, AnimationStrategy, SpriteSheet, range } from 'excalibur';
 
 import { Resources } from '../../resources';
 
@@ -21,5 +21,5 @@ export const walkRightAnimation = Animation.fromSpriteSheet(spriteSheet, range(S
 export const walkUpAnimation = Animation.fromSpriteSheet(spriteSheet, range(SIZE * 3, SIZE * 4 - 1), SPEED);
 
 export const idleAnimation = Animation.fromSpriteSheet(spriteSheet, range(SIZE * 5, SIZE * 6 - 1), SPEED);
-export const drinkAnimation = Animation.fromSpriteSheet(spriteSheet, range(SIZE * 8, SIZE * 9 - 1), SPEED);
+export const drinkAnimation = Animation.fromSpriteSheet(spriteSheet, range(SIZE * 8, SIZE * 9 - 1), SPEED, AnimationStrategy.Freeze);
 export const yayAnimation = Animation.fromSpriteSheet(spriteSheet, range(SIZE * 9, SIZE * 10 - 1), SPEED);

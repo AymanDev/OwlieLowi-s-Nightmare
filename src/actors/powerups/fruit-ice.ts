@@ -29,7 +29,7 @@ export class FruitIce extends Actor {
           if (!Resources.FruitIceSound.isPlaying()) {
             Resources.FruitIceSound.play(0.5);
           }
-          Resources.CollectSfx.play(0.25);
+          Resources.CollectSfx.play(0.1);
 
           engine.player.heal(10);
 

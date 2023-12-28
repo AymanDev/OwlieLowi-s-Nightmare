@@ -1,6 +1,6 @@
 const STORAGE_KEY = 'target';
 
-const START_TARGET = 3;
+const START_TARGET = 164;
 
 export const getLastSavedTarget = () => {
   const item = localStorage.getItem(STORAGE_KEY);

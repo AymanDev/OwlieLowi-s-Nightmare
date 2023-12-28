@@ -14,7 +14,7 @@ export class MainMenu extends Scene {
   }
 
   onActivate(_context: SceneActivationContext<unknown>): void {
-    Resources.MainMenuThemeMusic.play(0.1);
+    Resources.MainMenuThemeMusic.play(0.05);
 
     uiManager.mainMenu.show();
     uiManager.mainMenu.updateTargetValueUI(getLastSavedTarget());

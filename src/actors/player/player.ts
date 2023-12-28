@@ -1,4 +1,17 @@
-import { Actor, CollisionType, Color, Engine, Keys, Logger, Random, Shape, Timer, vec } from 'excalibur';
+import {
+  Actor,
+  CollisionStartEvent,
+  CollisionType,
+  Color,
+  EmitterType,
+  Engine,
+  Keys,
+  Logger,
+  Random,
+  Shape,
+  Timer,
+  vec
+} from 'excalibur';
 
 import { BubbleWrapEffect } from './effects/bubble-wrap-effect';
 import { Effect } from './effects/effect';
@@ -14,6 +27,7 @@ import { playerCollisionGroup } from '../../collision-groups';
 import { Game } from '../../game';
 import { Resources } from '../../resources';
 import { uiManager } from '../../ui/ui-manager';
+import { Enemy } from '../enemies/enemy';
 
 const SPEED = 200;
 const DRAG = 15;
@@ -32,6 +46,8 @@ export class Player extends Actor {
   private _isInHornyMode = false;
 
   private _isDashAvailable = true;
+  private _isDashDamaging = false;
+  private _dashTimer: Timer;
 
   private _activeEffects: Effect[] = [];
 
@@ -114,6 +130,10 @@ export class Player extends Actor {
     return this._isInHornyMode;
   }
 
+  public get isDashDamaging() {
+    return this._isDashDamaging;
+  }
+
   onInitialize() {
     this.isDead = false;
     this.health = 100;
@@ -124,6 +144,28 @@ export class Player extends Actor {
 
     this.graphics.use(idleAnimation);
     uiManager.hud.updateHealthUI(this.health);
+    uiManager.hud.hideHornyWarning();
+    uiManager.hud.updateDashCooldown(100);
+
+    this.on('collisionstart', (event) => this.onCollide(event));
+  }
+
+  onCollide(event: CollisionStartEvent<Actor>) {
+    const other = event.other;
+
+    if (!other.parent) {
+      return;
+    }
+
+    if (!other.parent.hasTag('enemy')) {
+      return;
+    }
+
+    const enemy = other.parent as Enemy;
+
+    if (this._isDashDamaging) {
+      enemy.die();
+    }
   }
 
   getEffectIndexByName(name: string) {
@@ -181,7 +223,6 @@ export class Player extends Actor {
 
       this.horny -= 1;
 
-      // this.actions.blink(100, 75, 5);
       this.actions.fade(0, 100).fade(1, 100);
     }
 
@@ -206,6 +247,10 @@ export class Player extends Actor {
       return;
     }
 
+    if (this._dashTimer) {
+      uiManager.hud.updateDashCooldown((this._dashTimer.getTimeRunning() / 2000) * 100);
+    }
+
     this.updateHorny();
 
     this.updateDrinking();
@@ -218,7 +263,7 @@ export class Player extends Actor {
     if (Math.abs(this.vel.x) > 0 || Math.abs(this.vel.y) > 0) {
       if (!Resources.FootstepSfx.isPlaying()) {
         Resources.FootstepSfx.playbackRate = rand.floating(0.5, 1.5);
-        Resources.FootstepSfx.play(0.08);
+        Resources.FootstepSfx.play(0.02);
       }
     }
   }
@@ -230,11 +275,14 @@ export class Player extends Actor {
         this.speedModificator -= 2;
         this.dragModificator -= 2;
 
+        this.horny -= 15;
+
         this.vel.x = 0;
         this.vel.y = 0;
       }
 
-      if (drinkAnimation.currentFrameIndex === 7) {
+      if (this._isDrinkingAnimationStarted && drinkAnimation.done) {
+        Logger.getInstance().info('Drinking is finished');
         this._isDrinking = false;
         this._isDrinkingAnimationStarted = false;
       }
@@ -294,12 +342,14 @@ export class Player extends Actor {
     let yVel = 0;
 
     if (this._isDrinking) {
+      this.vel = vec(xVel, yVel);
       return;
     }
 
     if (engine.input.keyboard.isHeld(Keys.Space) && this._drinksAvailable > 0) {
       this.drinksAvailable -= 1;
       this._isDrinking = true;
+      Resources.DrinkSfx.play(0.15);
       return;
     }
 
@@ -347,19 +397,32 @@ export class Player extends Actor {
       }
 
       this._isDashAvailable = false;
+      this._isDashDamaging = true;
 
-      const dashTimer = new Timer({
+      this._dashTimer = new Timer({
         fcn: () => {
           this._isDashAvailable = true;
+          Resources.UiNeutralNotificationSfx.play();
         },
         interval: 2000
       });
 
-      engine.currentScene.addTimer(dashTimer);
+      engine.currentScene.addTimer(this._dashTimer);
 
-      dashTimer.start();
+      this._dashTimer.start();
 
-      Resources.DashSfx.play(1);
+      const dashDamageTimer = new Timer({
+        fcn: () => {
+          this._isDashDamaging = false;
+        },
+        interval: 300
+      });
+
+      engine.currentScene.addTimer(dashDamageTimer);
+
+      dashDamageTimer.start();
+
+      Resources.DashSfx.play(0.15);
     }
 
     this.vel.x = xVel;
@@ -371,6 +434,8 @@ export class Player extends Actor {
       if (!this._isDrinkingAnimationStarted) {
         this._isDrinkingAnimationStarted = true;
 
+        Logger.getInstance().info('Started plaing drink animation');
+        drinkAnimation.reset();
         this.graphics.use(drinkAnimation);
       }
       return;

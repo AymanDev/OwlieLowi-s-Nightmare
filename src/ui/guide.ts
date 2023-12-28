@@ -1,4 +1,5 @@
 import { BaseUi, ui } from './ui';
+import { Resources } from '../resources';
 
 const guideEl = ui.querySelector('#guide');
 
@@ -10,6 +11,11 @@ export class Guide extends BaseUi {
   }
 
   addListenerToExitBtn(callback: () => void) {
-    exitBtn.onclick = callback;
+
+    exitBtn.onclick = ()=>{
+      Resources.UiNegativeSfx.play();
+
+      callback();
+    };
   }
 }

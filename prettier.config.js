@@ -8,5 +8,6 @@ module.exports = {
     {
       files: '{src,sandbox/src,sandbox/tests}/**/*.{ts,js,json,css,md}'
     }
-  ]
+  ],
+  eslintIntegration: true
 };

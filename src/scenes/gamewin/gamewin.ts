@@ -1,14 +1,24 @@
-import { Scene, SceneActivationContext } from 'excalibur';
+import { Scene, SceneActivationContext, vec } from 'excalibur';
 
+import { FakePlayer } from '../../actors/player/fake-player';
 import { Game } from '../../game';
 import { getLastSavedTarget, progressToNextTarget } from '../../progression';
 import { Resources } from '../../resources';
 import { uiManager } from '../../ui/ui-manager';
+import { SCENE_WIDTH } from '../gamezone/gamezone';
 
 export class GameWin extends Scene {
+
+  constructor(){
+    super();
+  }
+
+
   onInitialize(engine: Game): void {
     uiManager.gameWin.addContinueButtonListener(() => this.onContinue(engine));
     uiManager.gameWin.addReturnButtonListener(() => this.onReturn(engine));
+
+    this.add(new FakePlayer({ pos: vec(SCENE_WIDTH / 2, 150) }));
   }
 
   onActivate(_context: SceneActivationContext<unknown>): void {

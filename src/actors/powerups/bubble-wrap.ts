@@ -5,7 +5,7 @@ import { Resources } from '../../resources';
 import { getRandomPositionWithinPlayableSpace, getRandomRotation } from '../../scenes/gamezone/gamezone.utils';
 import { BubbleWrapEffect } from '../player/effects/bubble-wrap-effect';
 
-const SIZE = 64;
+const SIZE = 32;
 
 export class BubbleWrap extends Actor {
   constructor() {
@@ -26,7 +26,7 @@ export class BubbleWrap extends Actor {
         target: engine.player,
 
         action: () => {
-          Resources.ProtectionSfx.play(0.5);
+          Resources.ProtectionSfx.play(0.15);
 
           engine.player.addEffect(new BubbleWrapEffect());
 
