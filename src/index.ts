@@ -10,7 +10,9 @@ import { uiManager } from './ui/ui-manager';
 Physics.useArcadePhysics();
 Physics.acc = vec(0, 0);
 Physics.gravity = vec(0, 0);
-Physics.dynamicTreeVelocityMultiplier = 3;
+Physics.dynamicTreeVelocityMultiplier = 10;
+Physics.checkForFastBodies = true;
+Physics.disableMinimumSpeedForFastBody = true;
 
 const game = new Game();
 

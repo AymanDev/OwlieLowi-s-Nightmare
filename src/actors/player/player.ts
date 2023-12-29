@@ -1,4 +1,4 @@
-import { Actor, CollisionStartEvent, CollisionType, Color, EmitterType, Engine, Keys, Logger, Random, Shape, Timer, vec } from 'excalibur';
+import { Actor, CollisionStartEvent, CollisionType, Color, Engine, Keys, Logger, Random, Shape, Timer, vec } from 'excalibur';
 
 import { BubbleWrapEffect } from './effects/bubble-wrap-effect';
 import { Effect } from './effects/effect';
@@ -345,7 +345,7 @@ export class Player extends Actor {
       return;
     }
 
-    if (engine.input.keyboard.isHeld(Keys.Space) && this._drinksAvailable > 0) {
+    if (engine.input.keyboard.isHeld(Keys.Space) && this.drinksAvailable >= 1) {
       this.drinksAvailable -= 1;
       this._isDrinking = true;
       Resources.DrinkSfx.play(0.15);

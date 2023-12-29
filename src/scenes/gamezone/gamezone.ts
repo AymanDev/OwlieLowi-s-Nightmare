@@ -291,6 +291,24 @@ export class GameZone extends Scene {
   update(engine: Game, delta: number): void {
     super.update(engine, delta);
 
+    const pos = engine.player.pos;
+
+    if (pos.x < 9) {
+      engine.player.pos.x = 10;
+    }
+
+    if (pos.x > 1270) {
+      engine.player.pos.x = 1270;
+    }
+
+    if (pos.y < 310) {
+      engine.player.pos.y = 310;
+    }
+
+    if (pos.y > 690) {
+      engine.player.pos.y = 690;
+    }
+
     if (engine.points >= engine.target) {
       engine.goToScene('gamewin');
     }
