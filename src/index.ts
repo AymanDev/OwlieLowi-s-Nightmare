@@ -28,6 +28,14 @@ uiManager.preload.addPlayButtonClickListener(() => {
   });
 });
 
+uiManager.addFullscreenBtnEventListener(() => {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen();
+  } else if (document.exitFullscreen) {
+    document.exitFullscreen();
+  }
+});
+
 const query = new URLSearchParams(window.location.search);
 
 export const IS_DEBUG = Boolean(query.get('debug'));

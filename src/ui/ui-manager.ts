@@ -5,7 +5,8 @@ import { Guide } from './guide';
 import { Hud } from './hud';
 import { MainMenuScreen } from './mainmenu';
 import { Preload } from './preload';
-import { MainMenu } from '../scenes/mainmenu/mainmenu';
+
+const fullscreenBtn = document.querySelector<HTMLDivElement>('.fullscreenBtn');
 
 class UIManager {
   private _preload = new Preload();
@@ -48,6 +49,10 @@ class UIManager {
 
   public get credits() {
     return this._credits;
+  }
+
+  public addFullscreenBtnEventListener(callback: () => void) {
+    fullscreenBtn.onclick = callback;
   }
 }
 

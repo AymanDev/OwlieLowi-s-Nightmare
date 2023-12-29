@@ -25,6 +25,30 @@ button {
   object-fit: contain;
 }
 
+.fullscreenBtn {
+  position: absolute;
+  z-index: 1;
+  top: 32px;
+  right: 32px;
+
+  cursor: pointer;
+
+  transition: transform 0.5s ease;
+
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 5px;
+  padding: 5px;
+
+  &:hover {
+    transform: scale(1.75);
+  }
+
+  img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
 .background {
   position: absolute;
   left: 0;
