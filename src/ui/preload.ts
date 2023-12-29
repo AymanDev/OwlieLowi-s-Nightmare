@@ -1,6 +1,8 @@
 import { BaseUi, ui } from './ui';
 
-const loadButton = ui.querySelector<HTMLButtonElement>('.buttonContainer');
+const loadButton = ui.querySelector<HTMLDivElement>('.buttonContainer');
+
+const playBtn = loadButton.querySelector('#playBtn');
 
 export class Preload extends BaseUi {
   constructor() {
@@ -8,7 +10,12 @@ export class Preload extends BaseUi {
   }
 
   public addPlayButtonClickListener(callback: () => void) {
-    loadButton.onclick = callback;
+    loadButton.onclick = () => {
+      playBtn.textContent = 'Игра загружается...';
+      playBtn.classList.add('loadingBtn');
+
+      callback();
+    };
   }
 
   public override hide(): void {
