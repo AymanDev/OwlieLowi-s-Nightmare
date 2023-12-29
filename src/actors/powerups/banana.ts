@@ -32,7 +32,7 @@ export class Banana extends Actor {
         target: engine.player,
 
         action: () => {
-          Resources.CollectSfx.play(0.1);
+          Resources.CollectSfx.play();
 
           engine.points += 1;
           engine.player.heal(2);

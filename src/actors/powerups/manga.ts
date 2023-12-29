@@ -33,7 +33,7 @@ export class Manga extends Actor {
           } else {
             Resources.MangaSoundAlt.play(1.25);
           }
-          Resources.CollectSfx.play(0.1);
+          Resources.CollectSfx.play();
 
           engine.points += 1;
 

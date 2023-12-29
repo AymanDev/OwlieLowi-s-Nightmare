@@ -32,7 +32,7 @@ export class Vodka extends Actor {
           if (!Resources.VodkaSound.isPlaying()) {
             Resources.VodkaSound.play(0.6);
           }
-          Resources.CollectSfx.play(0.1);
+          Resources.CollectSfx.play();
 
           engine.player.damage(10);
           engine.player.speedModificator += 0.1;
