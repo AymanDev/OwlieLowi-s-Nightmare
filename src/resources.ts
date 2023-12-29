@@ -144,6 +144,7 @@ Resources.GameWinMusic.loop = true;
 Resources.DamageSfx.volume = VOLUME;
 Resources.FlyDeathSfx.volume = VOLUME - 0.1;
 Resources.GamePlayMusic.loop = true;
+Resources.GameWinMusic.loop = true;
 Resources.SmallAbominationDeathSfx.volume = VOLUME;
 
 export { Resources };

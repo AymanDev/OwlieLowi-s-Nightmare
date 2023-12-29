@@ -1,9 +1,15 @@
-.right {
+.bottlesContainer {
+  opacity: 0.75;
+
+  margin-top: auto;
+  margin-bottom: 12px;
+
+
   position: relative;
 
   .key {
     position: absolute;
-    top: 120px;
+    top: -30px;
     left: calc(50% - 33.5px);
 
     width: 67px;

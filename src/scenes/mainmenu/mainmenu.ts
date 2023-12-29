@@ -20,6 +20,8 @@ const phrases = [
 const rand = new Random();
 
 export class MainMenu extends Scene {
+  lastPhraseIndex = -1;
+
   onInitialize(engine: Game): void {
     uiManager.mainMenu.addPlayBtnClickListener(() => this.handlePlayBtn(engine));
 
@@ -43,7 +45,18 @@ export class MainMenu extends Scene {
   }
 
   updatePhrase() {
-    const phrase = phrases[rand.integer(0, phrases.length - 1)];
+    const phraseIdx = rand.integer(0, phrases.length - 1);
+
+    if (this.lastPhraseIndex !== -1) {
+      if (phraseIdx === this.lastPhraseIndex) {
+        this.updatePhrase();
+        return;
+      }
+    }
+
+    this.lastPhraseIndex = phraseIdx;
+
+    const phrase = phrases[phraseIdx];
 
     uiManager.mainMenu.updateMemeSignText(phrase);
   }

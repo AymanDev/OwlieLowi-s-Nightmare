@@ -18,7 +18,7 @@ const dashEl = hud.querySelector<HTMLDivElement>('#dash .value');
 
 const shiftEl = hud.querySelector('#dash > .key');
 
-const spacebarEl = hud.querySelector('.right > .key');
+const spacebarEl = hud.querySelector('.bottlesContainer > .key');
 
 export class Hud extends BaseUi {
   constructor() {
