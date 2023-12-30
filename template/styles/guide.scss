@@ -5,9 +5,21 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(0, 0, 0, 0.5);
+
+  background: url('https://korekuta.ru/static/minigames/project231231/static-images/bg-1.png');
+  background-size: cover;
 
   overflow: auto;
+
+  .wrapper {
+    display: flex;
+    flex: 1;
+
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.65);
+
+    overflow: auto;
+  }
 
   .container {
     width: unset;
@@ -16,9 +28,8 @@
     display: flex;
     flex-direction: column;
 
+    margin: auto 0;
     padding: 40px;
-
-    margin-top: auto;
   }
 
   .title {

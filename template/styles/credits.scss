@@ -4,7 +4,22 @@
   align-items: center;
   flex: 1;
 
-  background: rgba(0, 0, 0, 0.5);
+  background: url('https://korekuta.ru/static/minigames/project231231/static-images/bg-1.png');
+  background-size: cover;
+
+  overflow: auto;
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.65);
+
+    overflow: auto;
+  }
 
   .container {
     max-width: 800px;
@@ -15,20 +30,21 @@
 
     color: white;
 
-    .title {
-      margin-bottom: 50px;
+    .subtitle {
+      margin-top: 50px;
+
+      text-align: center;
+
+      font-size: 16px;
+      line-height: 20px;
     }
 
-    .subtitle {
-        text-align: center;
+    .link {
+      color: white;
     }
 
     .entry {
       margin-top: 20px;
-
-      a {
-        color: white;
-      }
     }
 
     .button {
