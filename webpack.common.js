@@ -6,21 +6,14 @@ module.exports = {
   entry: './src/index.ts',
   target: 'web',
   output: {
-    filename: '[name].js',
+    filename: '[name].[contenthash].js',
     sourceMapFilename: '[file].map',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: '[name].[hash][ext][query]'
   },
   devtool: 'source-map',
   module: {
     rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
-      },
       {
         test: /\.(png|svg|jpg|jpeg|gif|wav)$/i,
         type: 'asset/resource'
