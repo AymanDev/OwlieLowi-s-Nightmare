@@ -8,7 +8,15 @@ module.exports = merge(common, {
   mode: 'production',
   optimization: {
     minimize: true,
-    minimizer: [new TerserPlugin()]
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          mangle: true,
+          compress: true
+        }
+      })
+    ]
   },
   module: {
     rules: [
@@ -18,5 +26,5 @@ module.exports = merge(common, {
       }
     ]
   },
-  plugins: [new CompressionWebpackPlugin(), new MiniCssExtractPlugin()]
+  plugins: [new CompressionWebpackPlugin(), new MiniCssExtractPlugin({ filename: '[name].[hash].css' })]
 });
