@@ -22,3 +22,18 @@ Game was made for fun on my vacation so it is not best executed. There is so muc
 
 ## Post scriptum :writing_hand:	
 Game was made for [OwlieLowi](https://twitch.tv/owlielowi) and her community. Many thanks for how she is amazing and her streams :gift_heart:
+
+
+## Development :gear:
+### How to start dev environment:
+1. `git clone git@github.com:AymanDev/OwlieLowi-s-Nightmare.git`
+2. `cd OwlieLowi-s-Nightmare`
+
+
+## License notice :warning:	
+> [!CAUTION]
+> **Please don't reuse, sell and etc using assets from the game!**  
+> Most of the assets are was bought from asset stores or from other authors. Most of them mentioned properly in the game credits or i own full rights to use/sell or prohibit other from doing so. Thats because i bought full rights on it *(This is only for background, character and cat)*.
+
+> [!WARNING]
+>  Free assets used in this game are also mentioned in the credits you have to follow links to authors and theyre assets for their licenses. Most of free assets used in this game does not require any credits but i gave credits anyway.
