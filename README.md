@@ -24,10 +24,6 @@ Simple infinite type of game. Just run around collect items which gives buffs, h
 
 Game was made for fun on my vacation so it is not best executed. There is so much i have planned to add to this game, but first i decied to try port game on Bevy with Rust. This will help me understand that language more and achieve multiplatform without additional wrappers around my game.
 
-## Post scriptum :writing_hand:
-
-Game was made for [OwlieLowi](https://twitch.tv/owlielowi) and her community. Many thanks for how she is amazing and her streams :gift_heart:
-
 ## Development :gear:
 
 > [!WARNING]
@@ -52,3 +48,7 @@ Game was made for [OwlieLowi](https://twitch.tv/owlielowi) and her community. Ma
 
 > [!NOTE]
 > I had to delete all images used in this game from repo. Almost all images of items and enemies is from asset bought from Unity Asset Store. Assets bought in it go with [Unity's license](https://unity.com/ru/legal/as-terms). It is does not allow publising bought assets for game on github.
+
+## Post scriptum :writing_hand:
+
+Game was made for [OwlieLowi](https://twitch.tv/owlielowi) and her community. Many thanks for how she is amazing and her streams :gift_heart:
