@@ -30,10 +30,15 @@ Game was made for [OwlieLowi](https://twitch.tv/owlielowi) and her community. Ma
 
 ## Development :gear:
 
-### How to start dev environment:
+> [!WARNING]
+> Please read license notice bellow. There is no image assets for the game in this repo!
 
-1. `git clone git@github.com:AymanDev/OwlieLowi-s-Nightmare.git`
-2. `cd OwlieLowi-s-Nightmare`
+1. `git clone git@github.com:AymanDev/OwlieLowi-s-Nightmare.git` - clone repo
+2. `cd OwlieLowi-s-Nightmare` - go to cloned repo folder
+3. `nvm use` - using NVM use or install required version of nodejs
+4. `npm install` - install dependencies
+5. `npm run dev` - run webpack-dev-server
+6. `npm run build:dev` - build dev bundle or `npm run build:prod` to build production bundle
 
 ## License notice :warning:
 
@@ -45,4 +50,4 @@ Game was made for [OwlieLowi](https://twitch.tv/owlielowi) and her community. Ma
 > Free assets used in this game are also mentioned in the credits you have to follow links to authors and theyre assets for their licenses. Most of free assets used in this game does not require any credits but i gave credits anyway.  
 
 > [!NOTE]
-> I had to delete all images used in this game from repo. Almost of images of items is from asset bought from Unity Asset Store. Assets bought in it go with [Unity's license](https://unity.com/ru/legal/as-terms). It is does not allow publising bought assets for game on github.
+> I had to delete all images used in this game from repo. Almost all images of items and enemies is from asset bought from Unity Asset Store. Assets bought in it go with [Unity's license](https://unity.com/ru/legal/as-terms). It is does not allow publising bought assets for game on github.
