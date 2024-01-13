@@ -43,7 +43,8 @@ Game was made for [OwlieLowi](https://twitch.tv/owlielowi) and her community. Ma
 ## License notice :warning:
 
 > [!CAUTION]  
-> **Please don't reuse, sell and etc using assets from the game!**  
+> **Please don't reuse, sell and etc using assets from the game! Unless this is free asset mentioned in credits. Read bellow for more info!**
+>   
 > Most of the assets are was bought from asset stores or from other authors. Most of them mentioned properly in the game credits or i own full rights to use/sell or prohibit other from doing so. Thats because i bought full rights on it _(This is only for background, character and cat)_.  
   
 > [!WARNING]
