@@ -1,20 +1,15 @@
-# Excalibur TypeScript & Webpack Starter
+# OwlieLowi's Nightmare
+###### Project-231231 as it was known before release
+Game can be played here: https://owlielowi.korekuta.ru *(only desktop is supported)*
 
-This is a barebones [Excalibur](https://excaliburjs.com) game engine starter built using Typescript 4 & Webpack 5. It's a great starting place to jumpstart building your game! This repo is a template and can be used to [create your own repository](https://github.com/excaliburjs/template-ts-webpack/generate) in GitHub.
+### 🖼️Game preview image:
+![Game preview image](https://korekuta.ru/static/minigames/project231231/static-images/preview.png)
 
-Check out our [other samples](https://excaliburjs.com/samples) while you build your game or [ask us questions](https://github.com/excaliburjs/Excalibur/discussions).
+### 🛠️Techstack:
+* ***Excalibur** - simple game engine for simple 2d games to render with canvas*  
+* ***TypeScript** - JavaScript superset for improved DX, static types and much more*  
+* ***webpack** - bundling application and it resources for minimizing and generating hashes*   
+* ***SASS** - metalanguage base on css. Helps to reuse styles and other features*
 
-## Get Started
-
-* Using [Node.js](https://nodejs.org/en/) 14 (LTS) and [npm](https://www.npmjs.com/)
-* Run the `npm install` to install dependencies
-* Run the `npm start` to run the development server to test out changes
-   * [Webpack](https://webpack.js.org/) will build the [Typescript](https://www.typescriptlang.org/) into Javascript
-   * [Webpack dev server](https://webpack.js.org/configuration/dev-server/) will host the script in a little server on http://localhost:8080/
-
-## Publishing
-
-* Run `npm run build:dev` to produce Javascript bundles for debugging in the `dist/` folder
-* Run `npm run build:prod` to produce Javascript bundles for production (minified) in the `dist/` folder
-
-The `dist/` folder can be deployed to a static web host. We recommend [Netlify](https://netlify.com) or [GitHub Pages](https://pages.github.com/) since they are free to use.
+### Description
+Simple infinite type of game. Just run around collect items which gives buffs, heals and add points. Task is to collect points and go on another round of collecting points. Game was made for fun on my vacation so it is not best executed. There is so much i have planned to add to this game, but first i decied to try port game on Bevy with Rust. This will help me understand that language more and achieve multiplatform without additional wrappers around my game.
