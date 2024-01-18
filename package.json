@@ -16,6 +16,7 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "@excaliburjs/dev-tools": "^0.28.0",
+    "@types/js-cookie": "^3.0.6",
     "@typescript-eslint/eslint-plugin": "6.13.1",
     "@typescript-eslint/parser": "6.13.1",
     "clean-webpack-plugin": "3.0.0",
@@ -43,6 +44,7 @@
     "webpack-merge": "5.9.0"
   },
   "dependencies": {
-    "excalibur": "0.28.1"
+    "excalibur": "0.28.1",
+    "js-cookie": "^3.0.5"
   }
 }

@@ -102,6 +102,11 @@
     &.credits {
       background: rgba(0, 255, 255, 0.5);
     }
+
+    &.leaderboard {
+      background: rgba(128, 32, 32, 0.5);
+      text-decoration: none;
+    }
   }
 
   .version {
