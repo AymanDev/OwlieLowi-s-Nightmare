@@ -1,4 +1,5 @@
 import { Random, Scene, SceneActivationContext } from 'excalibur';
+import Cookies from 'js-cookie';
 
 import { Game } from '../../game';
 import { getLastSavedTarget } from '../../progression';
@@ -36,12 +37,13 @@ export class MainMenu extends Scene {
 
   onActivate(_context: SceneActivationContext<unknown>): void {
     this.updatePhrase();
-    // uiManager.mainMenu.updateMemeSignText(phrases[5]);
 
     Resources.MainMenuThemeMusic.play(0.05);
 
     uiManager.mainMenu.show();
     uiManager.mainMenu.updateTargetValueUI(getLastSavedTarget());
+
+    uiManager.mainMenu.setAuthStatus(!!Cookies.get('token'));
   }
 
   updatePhrase() {

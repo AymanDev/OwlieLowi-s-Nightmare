@@ -13,6 +13,8 @@ const creditsBtn = mainMenuScreen.querySelector<HTMLButtonElement>('.credits');
 
 const memeSignEl = mainMenuScreen.querySelector<HTMLDivElement>('.memeSign');
 
+const authStatus = mainMenuScreen.querySelector<HTMLDivElement>('.authStatus');
+
 export class MainMenuScreen extends BaseUi {
   constructor() {
     super(mainMenuScreen);
@@ -52,5 +54,16 @@ export class MainMenuScreen extends BaseUi {
 
   updateMemeSignText(text: string) {
     memeSignEl.innerHTML = text;
+  }
+
+  setAuthStatus(connected: boolean){
+    if (connected){
+      authStatus.querySelector('.yes').classList.remove('hide');
+      authStatus.querySelector('.no').classList.add('hide');
+      return;
+    }
+
+    authStatus.querySelector('.yes').classList.add('hide');
+    authStatus.querySelector('.no').classList.remove('hide');
   }
 }

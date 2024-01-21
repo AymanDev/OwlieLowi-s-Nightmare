@@ -107,6 +107,30 @@
       background: rgba(128, 32, 32, 0.5);
       text-decoration: none;
     }
+
+    &.authBtn {
+      background: rgba(32, 150, 200, 0.65);
+      text-decoration: none;
+    }
+
+  }
+
+  .authStatus {
+    position: absolute;
+    left: 25px;
+    top: 25px;
+
+    color: white;
+
+    font-size: 12px;
+
+    .yes {
+      color: rgba(32, 255, 128, 0.65)
+    }
+
+    .no {
+      color: rgba(255, 32, 32, 0.65)
+    }
   }
 
   .version {
