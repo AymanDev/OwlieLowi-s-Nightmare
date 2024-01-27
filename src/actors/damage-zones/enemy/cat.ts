@@ -9,7 +9,7 @@ import {
   idleSquintAnimation,
   showupAnimation
 } from './cat.animations';
-import { damageZoneCollisionGroup } from '../../../collision-groups';
+import { damagePlayerCollisionGroup } from '../../../collision-groups';
 import { Game } from '../../../game';
 import { Resources } from '../../../resources';
 import { SCENE_WIDTH } from '../../../scenes/gamezone/gamezone';
@@ -42,7 +42,7 @@ export class Cat extends Actor {
       z: 2,
 
       collider: Shape.Box(WIDTH, 20),
-      collisionGroup: damageZoneCollisionGroup,
+      collisionGroup: damagePlayerCollisionGroup,
       collisionType: CollisionType.Active
     });
   }

@@ -15,6 +15,8 @@ const memeSignEl = mainMenuScreen.querySelector<HTMLDivElement>('.memeSign');
 
 const authStatus = mainMenuScreen.querySelector<HTMLDivElement>('.authStatus');
 
+const whatsNewEl = mainMenuScreen.querySelector<HTMLDivElement>('.whatsnew');
+
 export class MainMenuScreen extends BaseUi {
   constructor() {
     super(mainMenuScreen);
@@ -56,8 +58,8 @@ export class MainMenuScreen extends BaseUi {
     memeSignEl.innerHTML = text;
   }
 
-  setAuthStatus(connected: boolean){
-    if (connected){
+  setAuthStatus(connected: boolean) {
+    if (connected) {
       authStatus.querySelector('.yes').classList.remove('hide');
       authStatus.querySelector('.no').classList.add('hide');
       return;
@@ -65,5 +67,21 @@ export class MainMenuScreen extends BaseUi {
 
     authStatus.querySelector('.yes').classList.add('hide');
     authStatus.querySelector('.no').classList.remove('hide');
+  }
+
+  showWhatsNew() {
+    whatsNewEl.classList.remove('hide');
+  }
+
+  hideWhatsNew() {
+    whatsNewEl.classList.add('hide');
+  }
+
+  addWhatsNewCloseClickListener(callback: () => void) {
+    whatsNewEl.querySelector<HTMLDivElement>('.close').onclick = () => {
+      Resources.UiPositiveSfx.play();
+
+      callback();
+    };
   }
 }

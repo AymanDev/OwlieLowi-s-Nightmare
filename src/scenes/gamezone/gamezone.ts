@@ -10,7 +10,7 @@ import { FruitIce } from '../../actors/powerups/fruit-ice';
 import { Manga } from '../../actors/powerups/manga';
 import { Pantsu } from '../../actors/powerups/pantsu';
 import { Vodka } from '../../actors/powerups/vodka';
-import { damageZoneCollisionGroup } from '../../collision-groups';
+import { damagePlayerCollisionGroup } from '../../collision-groups';
 import { Game } from '../../game';
 import { Resources } from '../../resources';
 import { uiManager } from '../../ui/ui-manager';
@@ -79,8 +79,7 @@ export class GameZone extends Scene {
       new Actor({
         pos: vec(SCENE_WIDTH / 2, 64),
         collider: Shape.Box(SCENE_WIDTH + 512, 512),
-        collisionType: CollisionType.Fixed,
-        collisionGroup: damageZoneCollisionGroup
+        collisionType: CollisionType.Fixed
       })
     );
 
@@ -206,7 +205,7 @@ export class GameZone extends Scene {
       () => {
         this.spawnFlys(new Fly());
       },
-      Math.max(3000, 6000 / this.currentDifficulty)
+      Math.max(3000, 4000 / this.currentDifficulty)
     );
 
     this.createSpawnTimer(
@@ -214,7 +213,7 @@ export class GameZone extends Scene {
       () => {
         this.spawnSmallAbomination(new SmallAbomination());
       },
-      Math.max(5000, 7000 / this.currentDifficulty)
+      Math.max(5000, 5000 / this.currentDifficulty)
     );
   }
 
@@ -263,8 +262,8 @@ export class GameZone extends Scene {
   spawnFruitIces = this.createSpawnFunction('fruit-ice', 1);
   spawnPantsu = this.createSpawnFunction('pantsu', 1);
   spawnBubbleWraps = this.createSpawnFunction('bubble-wrap', 1);
-  spawnFlys = this.createSpawnFunction('fly', 4);
-  spawnSmallAbomination = this.createSpawnFunction('small-abomination', 6);
+  spawnFlys = this.createSpawnFunction('fly', 10);
+  spawnSmallAbomination = this.createSpawnFunction('small-abomination', 15);
 
   setupBackground(engine: Game) {
     const actor = new Actor({

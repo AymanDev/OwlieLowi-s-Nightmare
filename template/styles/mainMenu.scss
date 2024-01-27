@@ -112,7 +112,6 @@
       background: rgba(32, 150, 200, 0.65);
       text-decoration: none;
     }
-
   }
 
   .authStatus {
@@ -125,11 +124,11 @@
     font-size: 12px;
 
     .yes {
-      color: rgba(32, 255, 128, 0.65)
+      color: rgba(32, 255, 128, 0.65);
     }
 
     .no {
-      color: rgba(255, 32, 32, 0.65)
+      color: rgba(255, 32, 32, 0.65);
     }
   }
 
@@ -150,6 +149,45 @@
 
     .link {
       color: white;
+    }
+  }
+
+  .whatsnew {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(5px);
+
+    .title {
+      margin-top: 100px;
+    }
+
+    .description {
+      color: white;
+
+      max-width: 900px;
+      margin: 75px auto 0 auto;
+
+      li {
+        margin-top: 20px;
+        font-size: 14px;
+        line-height: 16px;
+      }
+    }
+
+    .close {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+
+      font-size: 36px;
+      color: white;
+
+      cursor: pointer;
     }
   }
 }

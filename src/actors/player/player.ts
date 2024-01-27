@@ -1,4 +1,15 @@
-import { Actor, CollisionStartEvent, CollisionType, Color, Engine, Keys, Logger, Random, Shape, Timer, vec } from 'excalibur';
+import {
+  Actor,
+  CollisionType,
+  Color,
+  Keys,
+  Logger,
+  Random,
+  Shape,
+  Timer,
+  clamp,
+  vec
+} from 'excalibur';
 
 import { BubbleWrapEffect } from './effects/bubble-wrap-effect';
 import { Effect } from './effects/effect';
@@ -10,14 +21,18 @@ import {
   walkRightAnimation,
   walkUpAnimation
 } from './player.animations';
+import { DamageZone } from './player.damage-zone';
 import { playerCollisionGroup } from '../../collision-groups';
 import { Game } from '../../game';
 import { Resources } from '../../resources';
 import { uiManager } from '../../ui/ui-manager';
-import { Enemy } from '../enemies/enemy';
 
 const SPEED = 200;
-const DRAG = 15;
+const DRAG_THRESHOLD = 50;
+const DRAG = 2;
+const REST_DRAG = 5;
+
+const DASH_MULTIPLIER = 150;
 
 const rand = new Random();
 
@@ -41,6 +56,11 @@ export class Player extends Actor {
   private _isDrinking = false;
   private _isDrinkingAnimationStarted = false;
   private _drinksAvailable = 1;
+
+  private _damageZone: DamageZone;
+
+  private _isHasXInput = false;
+  private _isHasYInput = false;
 
   constructor(private _engine: Game) {
     super({
@@ -134,25 +154,11 @@ export class Player extends Actor {
     uiManager.hud.hideHornyWarning();
     uiManager.hud.updateDashCooldown(100);
 
-    this.on('collisionstart', (event) => this.onCollide(event));
-  }
+    this.body.friction = 1;
+    this.body.mass = 80;
 
-  onCollide(event: CollisionStartEvent<Actor>) {
-    const other = event.other;
-
-    if (!other.parent) {
-      return;
-    }
-
-    if (!other.parent.hasTag('enemy')) {
-      return;
-    }
-
-    const enemy = other.parent as Enemy;
-
-    if (this._isDashDamaging) {
-      enemy.die();
-    }
+    this._damageZone = new DamageZone(this);
+    this.addChild(this._damageZone);
   }
 
   getEffectIndexByName(name: string) {
@@ -319,24 +325,49 @@ export class Player extends Actor {
   }
 
   applyDrag() {
-    if (this.vel.x > DRAG) {
-      this.vel.x -= DRAG * this.dragModificator;
-    } else if (this.vel.x < -DRAG) {
-      this.vel.x += DRAG * this.dragModificator;
-    } else {
+    let dragX = DRAG * this.dragModificator;
+    let dragY = DRAG * this.dragModificator;
+
+    if (!this._isHasXInput) {
+      dragX = REST_DRAG * this.dragModificator;
+    }
+
+    if (!this._isHasYInput) {
+      dragY = REST_DRAG * this.dragModificator;
+    }
+
+    if (this.vel.x > DRAG_THRESHOLD) {
+      this.vel.x -= dragX;
+    } else if (this.vel.x < -DRAG_THRESHOLD) {
+      this.vel.x += dragX;
+    } else if (!this._isHasXInput) {
       this.vel.x = 0;
     }
 
-    if (this.vel.y > DRAG) {
-      this.vel.y -= DRAG * this.dragModificator;
-    } else if (this.vel.y < -DRAG) {
-      this.vel.y += DRAG * this.dragModificator;
-    } else {
+    if (this.vel.y > DRAG_THRESHOLD) {
+      this.vel.y -= dragY;
+    } else if (this.vel.y < -DRAG_THRESHOLD) {
+      this.vel.y += dragY;
+    } else if (!this._isHasYInput) {
       this.vel.y = 0;
     }
+
+    let minSpeed = -SPEED * this.speedModificator;
+    let maxSpeed = SPEED * this.speedModificator;
+
+    if (this.isDashDamaging) {
+      minSpeed *= DASH_MULTIPLIER;
+      maxSpeed *= DASH_MULTIPLIER;
+    }
+
+    this.vel.x = clamp(this.vel.x, minSpeed, maxSpeed);
+    this.vel.y = clamp(this.vel.y, minSpeed, maxSpeed);
   }
 
-  updateInputs(engine: Engine) {
+  updateInputs(engine: Game) {
+    this._isHasXInput = false;
+    this._isHasYInput = false;
+
     let xVel = 0;
     let yVel = 0;
 
@@ -387,13 +418,7 @@ export class Player extends Actor {
     }
 
     if (this._isDashAvailable && engine.input.keyboard.isHeld(Keys.ShiftLeft)) {
-      if (Math.abs(xVel) > 0) {
-        xVel *= 20;
-      }
-
-      if (Math.abs(yVel) > 0) {
-        yVel *= 20;
-      }
+      this.body.applyLinearImpulse(vec(xVel * DASH_MULTIPLIER, yVel * DASH_MULTIPLIER));
 
       this._isDashAvailable = false;
       this._isDashDamaging = true;
@@ -414,7 +439,7 @@ export class Player extends Actor {
         fcn: () => {
           this._isDashDamaging = false;
         },
-        interval: 300
+        interval: 400
       });
 
       engine.currentScene.addTimer(dashDamageTimer);
@@ -424,8 +449,12 @@ export class Player extends Actor {
       Resources.DashSfx.play(0.15);
     }
 
-    this.vel.x = xVel;
-    this.vel.y = yVel;
+    this._isHasXInput = Math.abs(xVel) > 0;
+    this._isHasYInput = Math.abs(yVel) > 0;
+
+    if (this._isHasXInput || this._isHasYInput) {
+      this.body.applyLinearImpulse(vec(xVel * 2, yVel * 2));
+    }
   }
 
   updateAnimations() {

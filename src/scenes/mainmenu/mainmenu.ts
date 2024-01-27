@@ -20,6 +20,8 @@ const phrases = [
 
 const rand = new Random();
 
+const VER = '0.2';
+
 export class MainMenu extends Scene {
   lastPhraseIndex = -1;
 
@@ -33,6 +35,14 @@ export class MainMenu extends Scene {
     uiManager.credits.addReturnButtonListener(() => this.handleExitCreditsBtn());
 
     uiManager.mainMenu.addMemeSignClickListener(() => this.updatePhrase());
+
+    uiManager.mainMenu.addWhatsNewCloseClickListener(() => this.closeWhatsNew());
+
+    const localVer = localStorage.getItem('ver');
+
+    if (localVer !== VER) {
+      uiManager.mainMenu.showWhatsNew();
+    }
   }
 
   onActivate(_context: SceneActivationContext<unknown>): void {
@@ -44,6 +54,11 @@ export class MainMenu extends Scene {
     uiManager.mainMenu.updateTargetValueUI(getLastSavedTarget());
 
     uiManager.mainMenu.setAuthStatus(!!Cookies.get('token'));
+  }
+
+  closeWhatsNew() {
+    uiManager.mainMenu.hideWhatsNew();
+    localStorage.setItem('ver', VER);
   }
 
   updatePhrase() {
