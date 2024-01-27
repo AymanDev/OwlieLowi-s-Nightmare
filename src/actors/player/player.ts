@@ -1,15 +1,4 @@
-import {
-  Actor,
-  CollisionType,
-  Color,
-  Keys,
-  Logger,
-  Random,
-  Shape,
-  Timer,
-  clamp,
-  vec
-} from 'excalibur';
+import { Actor, CollisionType, Color, KeyEvent, Keys, Logger, Random, Shape, Timer, clamp, vec } from 'excalibur';
 
 import { BubbleWrapEffect } from './effects/bubble-wrap-effect';
 import { Effect } from './effects/effect';
@@ -383,25 +372,25 @@ export class Player extends Actor {
       return;
     }
 
-    const keys = [Keys.W, Keys.A, Keys.S, Keys.D];
+    const keys = [Keys.W, Keys.A, Keys.S, Keys.D, Keys.ArrowUp, Keys.ArrowDown, Keys.ArrowLeft, Keys.ArrowRight];
 
     if (!keys.some((key) => engine.input.keyboard.isHeld(key))) {
       return;
     }
 
-    if (engine.input.keyboard.isHeld(Keys.W)) {
+    if (engine.input.keyboard.isHeld(Keys.W) || engine.input.keyboard.isHeld(Keys.ArrowUp)) {
       yVel -= SPEED;
     }
 
-    if (engine.input.keyboard.isHeld(Keys.S)) {
+    if (engine.input.keyboard.isHeld(Keys.S) || engine.input.keyboard.isHeld(Keys.ArrowDown)) {
       yVel += SPEED;
     }
 
-    if (engine.input.keyboard.isHeld(Keys.A)) {
+    if (engine.input.keyboard.isHeld(Keys.A) || engine.input.keyboard.isHeld(Keys.ArrowLeft)) {
       xVel -= SPEED;
     }
 
-    if (engine.input.keyboard.isHeld(Keys.D)) {
+    if (engine.input.keyboard.isHeld(Keys.D) || engine.input.keyboard.isHeld(Keys.ArrowRight)) {
       xVel += SPEED;
     }
 
