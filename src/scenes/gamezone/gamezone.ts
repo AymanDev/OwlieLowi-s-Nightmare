@@ -79,7 +79,8 @@ export class GameZone extends Scene {
       new Actor({
         pos: vec(SCENE_WIDTH / 2, 64),
         collider: Shape.Box(SCENE_WIDTH + 512, 512),
-        collisionType: CollisionType.Fixed
+        collisionType: CollisionType.Fixed,
+        collisionGroup: damagePlayerCollisionGroup
       })
     );
 
