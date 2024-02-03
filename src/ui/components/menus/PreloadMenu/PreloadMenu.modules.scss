@@ -1,0 +1,54 @@
+@import '../../../mixins.scss';
+
+.root {
+  position: relative;
+
+  display: flex;
+  flex: 1;
+
+  background: url('https://korekuta.ru/static/minigames/project231231/static-images/preload-bg.png');
+  background-size: cover;
+}
+
+.overlay {
+  @include stretch-absolute;
+
+  background: rgba($color: #000000, $alpha: 0.25);
+  backdrop-filter: blur(5px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+
+  transition: 0.25s ease all;
+
+  &.disabled,
+  &:hover {
+    background: rgba($color: #000000, $alpha: 0.75);
+    backdrop-filter: blur(10px);
+
+    .button {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.disabled {
+  pointer-events: none;
+}
+
+.button {
+  background: rgba($color: #1ed6ab, $alpha: 0.5);
+  color: white;
+
+  padding: 40px;
+  text-align: center;
+
+  font-size: 32px;
+
+  pointer-events: none;
+
+  transition: 0.25s ease all;
+}

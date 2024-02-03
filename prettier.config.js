@@ -6,8 +6,9 @@ module.exports = {
   arrowParens: 'always',
   overrides: [
     {
-      files: '{src,sandbox/src,sandbox/tests}/**/*.{ts,js,json,css,md}'
+      files: '{src,sandbox/src,sandbox/tests}/**/*.{ts,tsx,js,jsx,json,css,md}'
     }
   ],
-  eslintIntegration: true
+  eslintIntegration: true,
+  jsxBracketSameLine: true
 };

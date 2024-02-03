@@ -13,7 +13,12 @@ module.exports = merge(common, {
     rules: [
       {
         test: /\.s[ac]ss$/i,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        use: [
+          'style-loader',
+          '@teamsupercell/typings-for-css-modules-loader',
+          { loader: 'css-loader', options: { modules: true } },
+          'sass-loader'
+        ]
       }
     ]
   }

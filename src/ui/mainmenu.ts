@@ -1,87 +1,82 @@
 import { BaseUi, ui } from './ui';
 import { Resources } from '../resources';
 
-const mainMenuScreen = ui.querySelector('#mainMenu');
+// const mainMenuScreen = ui.querySelector('#mainMenu');
 
-const targetValue = mainMenuScreen.querySelector('.target > .value');
+// const targetValue = mainMenuScreen.querySelector('.target > .value');
 
-const playBtn = mainMenuScreen.querySelector<HTMLButtonElement>('.play');
+// const playBtn = mainMenuScreen.querySelector<HTMLButtonElement>('.play');
 
-const guideBtn = mainMenuScreen.querySelector<HTMLButtonElement>('.guide');
+// const guideBtn = mainMenuScreen.querySelector<HTMLButtonElement>('.guide');
 
-const creditsBtn = mainMenuScreen.querySelector<HTMLButtonElement>('.credits');
+// const creditsBtn = mainMenuScreen.querySelector<HTMLButtonElement>('.credits');
 
-const memeSignEl = mainMenuScreen.querySelector<HTMLDivElement>('.memeSign');
+// const memeSignEl = mainMenuScreen.querySelector<HTMLDivElement>('.memeSign');
 
-const authStatus = mainMenuScreen.querySelector<HTMLDivElement>('.authStatus');
+// const authStatus = mainMenuScreen.querySelector<HTMLDivElement>('.authStatus');
 
-const whatsNewEl = mainMenuScreen.querySelector<HTMLDivElement>('.whatsnew');
+// const whatsNewEl = mainMenuScreen.querySelector<HTMLDivElement>('.whatsnew');
 
 export class MainMenuScreen extends BaseUi {
-  constructor() {
-    super(mainMenuScreen);
-  }
+  // constructor() {
+  //   super(mainMenuScreen);
+  // }
 
   addPlayBtnClickListener(callback: () => void) {
-    playBtn.onclick = callback;
+    // playBtn.onclick = callback;
   }
 
   addGuideBtnClickListener(callback: () => void) {
-    guideBtn.onclick = () => {
-      Resources.UiPositiveSfx.play();
-
-      callback();
-    };
+    // guideBtn.onclick = () => {
+    //   Resources.UiPositiveSfx.play();
+    //   callback();
+    // };
   }
 
   addCreditsBtnClicklistener(callback: () => void) {
-    creditsBtn.onclick = () => {
-      Resources.UiPositiveSfx.play();
-
-      callback();
-    };
+    // creditsBtn.onclick = () => {
+    //   Resources.UiPositiveSfx.play();
+    //   callback();
+    // };
   }
 
   updateTargetValueUI(value: number) {
-    targetValue.textContent = value.toString();
+    // targetValue.textContent = value.toString();
   }
 
   addMemeSignClickListener(callback: () => void) {
-    memeSignEl.onclick = () => {
-      Resources.UiPositiveSfx.play();
-
-      callback();
-    };
+    // memeSignEl.onclick = () => {
+    //   Resources.UiPositiveSfx.play();
+    //   callback();
+    // };
   }
 
   updateMemeSignText(text: string) {
-    memeSignEl.innerHTML = text;
+    // memeSignEl.innerHTML = text;
   }
 
   setAuthStatus(connected: boolean) {
-    if (connected) {
-      authStatus.querySelector('.yes').classList.remove('hide');
-      authStatus.querySelector('.no').classList.add('hide');
-      return;
-    }
-
-    authStatus.querySelector('.yes').classList.add('hide');
-    authStatus.querySelector('.no').classList.remove('hide');
+    // if (connected) {
+    //   authStatus.querySelector('.yes').classList.remove('hide');
+    //   authStatus.querySelector('.no').classList.add('hide');
+    //   return;
+    // }
+    // authStatus.querySelector('.yes').classList.add('hide');
+    // authStatus.querySelector('.no').classList.remove('hide');
   }
 
   showWhatsNew() {
-    whatsNewEl.classList.remove('hide');
+    // whatsNewEl.classList.remove('hide');
   }
 
   hideWhatsNew() {
-    whatsNewEl.classList.add('hide');
+    // whatsNewEl.classList.add('hide');
   }
 
   addWhatsNewCloseClickListener(callback: () => void) {
-    whatsNewEl.querySelector<HTMLDivElement>('.close').onclick = () => {
-      Resources.UiPositiveSfx.play();
-
-      callback();
-    };
+    // whatsNewEl.querySelector<HTMLDivElement>('.close').onclick = () => {
+    //   Resources.UiPositiveSfx.play();
+    //   callback();
+    // };
   }
 }

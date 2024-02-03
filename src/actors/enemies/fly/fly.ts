@@ -1,7 +1,4 @@
-import { Trigger, vec } from 'excalibur';
-
 import { deathAnimation, idleAnimation } from './fly.animations';
-import { IS_DEBUG } from '../../..';
 import { Game } from '../../../game';
 import { Resources } from '../../../resources';
 import { Enemy } from '../enemy';

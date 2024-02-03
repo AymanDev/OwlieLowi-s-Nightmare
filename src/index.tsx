@@ -1,11 +1,8 @@
-import '../template/styles/ui.scss';
-
-import { DevTool } from '@excaliburjs/dev-tools';
 import { Physics, vec } from 'excalibur';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
 
-import { Game } from './game';
-import { Resources } from './resources';
-import { uiManager } from './ui/ui-manager';
+import { Root } from './ui/components/Root';
 
 Physics.useArcadePhysics();
 Physics.acc = vec(0, 0);
@@ -14,35 +11,10 @@ Physics.dynamicTreeVelocityMultiplier = 10;
 Physics.checkForFastBodies = true;
 Physics.disableMinimumSpeedForFastBody = true;
 
-const game = new Game();
+const rootEl = document.getElementById('root');
+const root = createRoot(rootEl);
 
-uiManager.preload.addPlayButtonClickListener(() => {
-  uiManager.preload.disable();
-
-  game.start().then(() => {
-    Resources.GameInitSfx.play();
-
-    game.goToScene('mainmenu');
-
-    uiManager.preload.hide();
-  });
-});
-
-uiManager.addFullscreenBtnEventListener(() => {
-  if (!document.fullscreenElement) {
-    document.documentElement.requestFullscreen();
-  } else if (document.exitFullscreen) {
-    document.exitFullscreen();
-  }
-});
-
-const query = new URLSearchParams(window.location.search);
-
-export const IS_DEBUG = Boolean(query.get('debug'));
-
-if (IS_DEBUG) {
-  const devtool = new DevTool(game);
-}
+root.render(<Root />);
 
 // eslint-disable-next-line no-console
 console.log(

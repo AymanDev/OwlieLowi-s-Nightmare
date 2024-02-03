@@ -16,7 +16,11 @@
   "license": "BSD-2-Clause",
   "devDependencies": {
     "@excaliburjs/dev-tools": "^0.28.0",
+    "@teamsupercell/typings-for-css-modules-loader": "^2.5.2",
     "@types/js-cookie": "^3.0.6",
+    "@types/node-sass": "^4.11.7",
+    "@types/react": "^18.2.51",
+    "@types/react-dom": "^18.2.18",
     "@typescript-eslint/eslint-plugin": "6.13.1",
     "@typescript-eslint/parser": "6.13.1",
     "clean-webpack-plugin": "3.0.0",
@@ -26,12 +30,16 @@
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-import": "^2.29.0",
     "eslint-plugin-jsdoc": "46.9.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-prettier": "^5.1.2",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-unused-imports": "^3.0.0",
     "html-webpack-plugin": "5.5.3",
     "mini-css-extract-plugin": "^2.7.6",
+    "node-sass": "^9.0.0",
     "prettier": "^3.1.0",
-    "sass": "^1.69.5",
+    "sass": "^1.70.0",
     "sass-loader": "^13.3.2",
     "source-map-loader": "2.0.2",
     "style-loader": "^3.3.3",
@@ -44,7 +52,13 @@
     "webpack-merge": "5.9.0"
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "excalibur": "0.28.6",
-    "js-cookie": "^3.0.5"
+    "js-cookie": "^3.0.5",
+    "mobx-keystone": "^1.9.0",
+    "mobx-react-lite": "^4.0.5",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.0.1"
   }
 }

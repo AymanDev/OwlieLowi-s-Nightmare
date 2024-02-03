@@ -5,40 +5,72 @@
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": ["./src/**/tsconfig.json"],
-    "sourceType": "module"
+    "project": [
+      "./src/**/tsconfig.json"
+    ],
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
   },
-  "plugins": ["@typescript-eslint", "jsdoc", "import"],
-  "extends": ["plugin:jsdoc/recommended", "prettier", "plugin:import/typescript"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "jsdoc",
+    "import",
+    "unused-imports"
+  ],
+  "extends": [
+    "plugin:jsdoc/recommended",
+    "prettier",
+    "plugin:react/recommended",
+    "plugin:import/typescript"
+  ],
   "rules": {
     "@typescript-eslint/naming-convention": [
       "error",
       {
         "selector": "class",
-        "format": ["PascalCase"]
+        "format": [
+          "PascalCase"
+        ]
       },
       {
         "selector": "memberLike",
-        "modifiers": ["private", "static"],
-        "format": ["UPPER_CASE"],
+        "modifiers": [
+          "private",
+          "static"
+        ],
+        "format": [
+          "UPPER_CASE"
+        ],
         "leadingUnderscore": "require"
       },
       {
         "selector": "memberLike",
-        "modifiers": ["private"],
-        "format": ["camelCase"],
+        "modifiers": [
+          "private"
+        ],
+        "format": [
+          "camelCase"
+        ],
         "leadingUnderscore": "require"
       },
       {
         "selector": "interface",
-        "format": ["PascalCase"],
+        "format": [
+          "PascalCase"
+        ],
         "custom": {
           "regex": "^I[A-Z]",
           "match": false
         }
       }
     ],
-    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/indent": [
+      "error",
+      2
+    ],
     "@typescript-eslint/no-empty-function": "error",
     "curly": "error",
     "dot-notation": "error",
@@ -46,7 +78,13 @@
     "no-console": [
       "error",
       {
-        "allow": ["debug", "info", "time", "timeEnd", "trace"]
+        "allow": [
+          "debug",
+          "info",
+          "time",
+          "timeEnd",
+          "trace"
+        ]
       }
     ],
     "quotes": [
@@ -71,12 +109,24 @@
         "code": 140
       }
     ],
-    "semi": ["error", "always"],
-    "comma-dangle": ["error", "never"],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
     "no-trailing-spaces": "error",
-    "eqeqeq": ["error", "smart"],
+    "eqeqeq": [
+      "error",
+      "smart"
+    ],
     "no-irregular-whitespace": "error",
-    "brace-style": ["error", "1tbs"],
+    "brace-style": [
+      "error",
+      "1tbs"
+    ],
     "no-unused-expressions": [
       "error",
       {
@@ -94,7 +144,16 @@
     "jsdoc/check-tag-names": [
       "error",
       {
-        "definedTags": ["hidden", "internal", "source", "obsolete", "warning", "notimplemented", "credit", "typedoc"]
+        "definedTags": [
+          "hidden",
+          "internal",
+          "source",
+          "obsolete",
+          "warning",
+          "notimplemented",
+          "credit",
+          "typedoc"
+        ]
       }
     ],
     "import/order": [
@@ -103,8 +162,31 @@
         "alphabetize": {
           "order": "asc"
         },
-        "groups": [["builtin", "external"], ["internal", "parent", "sibling"], "index"],
-        "newlines-between": "always"
+        "groups": [
+          [
+            "builtin",
+            "external"
+          ],
+          [
+            "internal",
+            "parent",
+            "sibling"
+          ],
+          "index"
+        ],
+        "newlines-between": "always",
+        "pathGroups": [
+          {
+            "pattern": "@/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "./**.scss",
+            "group": "sibling",
+            "position": "after"
+          }
+        ]
       }
     ],
     "import/no-unresolved": [
