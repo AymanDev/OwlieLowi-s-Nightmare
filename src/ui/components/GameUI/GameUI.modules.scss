@@ -1,0 +1,38 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100vw;
+  height: 100vh;
+
+  object-fit: contain;
+
+  overflow: hidden;
+}
+
+.container {
+  position: relative;
+  width: calc(100vh * 1.78);
+
+  aspect-ratio: 16 / 9;
+
+  max-width: 1920px;
+  max-height: 1080px;
+
+  overflow: hidden;
+}
+
+.ui {
+  display: flex;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.game {
+  display: block;
+}

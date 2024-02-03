@@ -1,7 +1,7 @@
 import { Actor, ActorArgs, Animation, CollisionType, Shape, Timer, Trigger, Vector, vec } from 'excalibur';
 
-import { IS_DEBUG } from '../..';
 import { enemyGroup } from '../../collision-groups';
+import { IS_DEBUG } from '../../debug';
 import { Game } from '../../game';
 import { Resources } from '../../resources';
 import { getRandomPositionWithinPlayableSpace } from '../../scenes/gamezone/gamezone.utils';
