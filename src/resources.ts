@@ -9,11 +9,14 @@ import enemyShowupSpriteSheet from './images/actor/enemy/enemy_showup.png';
 import enemyPawAttackSpriteSheet from './images/actor/enemy/paw_attack.png';
 import flyDeathSpritesheet from './images/actor/fly/m11_Dead_Ground.png';
 import flyIdleSpritesheet from './images/actor/fly/m11_Idle.png';
+import goblinDeathSpritesheet from './images/actor/goblin/death.png';
+import goblinIdleSpriteSheet from './images/actor/goblin/walk.png';
 import abominationDeathSpritesheet from './images/actor/small_abomination/m13_Dead.png';
 import abominationIdleSpritesheet from './images/actor/small_abomination/m13_Idle.png';
 import backgroundImage from './images/background.png';
 import bananaImage from './images/items/banana.png';
 import bubbleWrapImage from './images/items/bubble_wrap.png';
+import crocusImage from './images/items/crocus.png';
 import fruitIceImage from './images/items/fruit_ice.png';
 import mangaImage from './images/items/manga.png';
 import pantsuImage from './images/items/pantsu.png';
@@ -44,6 +47,7 @@ import collectSfx from './sounds/sfx/sfx_coin_single2.wav';
 import catAttackSfx from './sounds/sfx/sfx_damaged_cute.wav';
 import failSfx from './sounds/sfx/sfx_fail3.wav';
 import footstepSfx from './sounds/sfx/sfx_footstep2.wav';
+import goblinDeathSfx from './sounds/sfx/sfx_goblin_death.wav';
 import drinkSfx from './sounds/sfx/sfx_heal7.wav';
 import dashSfx from './sounds/sfx/sfx_sweep3.wav';
 import uiNegativeSfx from './sounds/sfx/sfx_ui_negative.wav';
@@ -111,6 +115,8 @@ const Resources = {
 
   BananaImage: new ImageSource(bananaImage),
 
+  CrocusImage: new ImageSource(crocusImage),
+
   // Main enemy
   EnemyIdleSpriteSheet: new ImageSource(enemyIdleSpriteSheet),
   EnemyPawAttackSpriteSheet: new ImageSource(enemyPawAttackSpriteSheet),
@@ -125,11 +131,21 @@ const Resources = {
   // Abomination enemy
   SmallAbominationIdleSpriteSheet: new ImageSource(abominationIdleSpritesheet),
   SmallAbominationDeathSpriteSheet: new ImageSource(abominationDeathSpritesheet),
-  SmallAbominationDeathSfx: new Sound(abominationDeathSfx)
+  SmallAbominationDeathSfx: new Sound(abominationDeathSfx),
+
+  // Goblin
+  GoblinIdleSpriteSheet: new ImageSource(goblinIdleSpriteSheet),
+  GoblinDeathSpriteSheet: new ImageSource(goblinDeathSpritesheet),
+  GoblinDeathSfx: new Sound(goblinDeathSfx)
 };
 
 // Temporary
-const VOLUME = 0.15;
+let VOLUME = 0.15;
+if (localStorage.getItem('volume')) {
+  VOLUME = Number(localStorage.getItem('volume'));
+} else {
+  localStorage.setItem('volume', VOLUME.toString());
+}
 
 Resources.MainMenuThemeMusic.loop = true;
 Resources.GameInitSfx.volume = VOLUME - 0.11;
@@ -143,6 +159,7 @@ Resources.FailSfx.volume = VOLUME;
 Resources.GameWinMusic.loop = true;
 Resources.DamageSfx.volume = VOLUME;
 Resources.FlyDeathSfx.volume = VOLUME - 0.1;
+Resources.GoblinDeathSfx.volume = VOLUME - 0.1;
 Resources.GamePlayMusic.loop = true;
 Resources.GameWinMusic.loop = true;
 Resources.SmallAbominationDeathSfx.volume = VOLUME;

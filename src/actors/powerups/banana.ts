@@ -34,7 +34,7 @@ export class Banana extends Actor {
         action: () => {
           Resources.CollectSfx.play();
 
-          engine.points += 1;
+          engine.addPoints(1);
           engine.player.heal(2);
           engine.player.speedModificator += 0.01;
           engine.player.dragModificator += 0.01;

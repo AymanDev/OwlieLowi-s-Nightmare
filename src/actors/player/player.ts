@@ -1,7 +1,7 @@
 import { Actor, CollisionType, Color, KeyEvent, Keys, Logger, Random, Shape, Timer, clamp, vec } from 'excalibur';
 
 import { BubbleWrapEffect } from './effects/bubble-wrap-effect';
-import { Effect } from './effects/effect';
+import { ALL_EFFECT_NAME as ALL_EFFECT_NAMES, Effect } from './effects/effect';
 import {
   drinkAnimation,
   idleAnimation,
@@ -64,6 +64,8 @@ export class Player extends Actor {
 
       z: 10
     });
+
+    ALL_EFFECT_NAMES.forEach(uiManager.hud.hideEffect);
   }
 
   public get drinksAvailable() {
@@ -171,6 +173,8 @@ export class Player extends Actor {
   addEffect(effect: Effect) {
     const existingEffect = this.getEffect(effect);
 
+    uiManager.hud.showEffect(effect.name);
+
     if (existingEffect) {
       existingEffect.resetCooldown();
 
@@ -188,6 +192,8 @@ export class Player extends Actor {
     if (existingEffectIdx === -1) {
       return;
     }
+
+    uiManager.hud.hideEffect(effect.name);
 
     this._activeEffects = this._activeEffects.filter((_, idx) => idx !== existingEffectIdx);
   }

@@ -29,7 +29,7 @@ export class Pantsu extends Actor {
           Resources.PantsuSound.play(3);
           Resources.CollectSfx.play();
 
-          engine.points += 20;
+          engine.addPoints(20);
           engine.player.speedModificator += 0.2;
           engine.player.dragModificator += 0.2;
           engine.player.horny += 10;

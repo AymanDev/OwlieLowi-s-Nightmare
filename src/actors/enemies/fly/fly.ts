@@ -1,7 +1,4 @@
-import { Trigger, vec } from 'excalibur';
-
 import { deathAnimation, idleAnimation } from './fly.animations';
-import { IS_DEBUG } from '../../..';
 import { Game } from '../../../game';
 import { Resources } from '../../../resources';
 import { Enemy } from '../enemy';
@@ -20,7 +17,7 @@ export class Fly extends Enemy {
     this.graphics.use(idleAnimation);
   }
 
-  onDead(): void {
+  override onDead(_: Game): void {
     Resources.FlyDeathSfx.play();
   }
 

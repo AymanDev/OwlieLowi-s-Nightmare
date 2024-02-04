@@ -20,7 +20,7 @@ const phrases = [
 
 const rand = new Random();
 
-const VER = '0.3';
+const VER = '0.4';
 
 export class MainMenu extends Scene {
   lastPhraseIndex = -1;
