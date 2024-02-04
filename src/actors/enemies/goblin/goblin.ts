@@ -16,10 +16,10 @@ export class Goblin extends Enemy {
     this.graphics.use(idleAnimation);
   }
 
-  onDead(engine:Game): void {
+  onDead(engine: Game): void {
     super.onDead(engine);
 
     Resources.GoblinDeathSfx.play();
-
+    engine.addPoints(1);
   }
 }
