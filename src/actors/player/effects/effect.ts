@@ -2,13 +2,17 @@ import { Timer } from 'excalibur';
 
 import { Game } from '../../../game';
 
+export const ALL_EFFECT_NAME = [];
+
 export class Effect {
   private _timer: Timer;
 
   constructor(
     private _name: string,
     private _cooldown: number
-  ) {}
+  ) {
+    ALL_EFFECT_NAME.push(_name);
+  }
 
   public get name() {
     return this._name;

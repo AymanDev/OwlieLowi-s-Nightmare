@@ -1,11 +1,11 @@
-import { deathAnimation, idleAnimation } from './small-abomination.animations';
+import { deathAnimation, idleAnimation } from './goblin.animations';
 import { Game } from '../../../game';
 import { Resources } from '../../../resources';
 import { Enemy } from '../enemy';
 
-const SPEED = 50;
+const SPEED = 100;
 
-export class SmallAbomination extends Enemy {
+export class Goblin extends Enemy {
   constructor() {
     super(SPEED, deathAnimation);
   }
@@ -19,6 +19,7 @@ export class SmallAbomination extends Enemy {
   onDead(engine:Game): void {
     super.onDead(engine);
 
-    Resources.SmallAbominationDeathSfx.play();
+    Resources.GoblinDeathSfx.play();
+
   }
 }

@@ -1,5 +1,6 @@
 import { DisplayMode, Engine, Loader } from 'excalibur';
 
+import { X2Effect } from './actors/player/effects/x2-effect';
 import { getLastSavedTarget } from './progression';
 import { Resources } from './resources';
 import { GameOver } from './scenes/gameover/gameover';
@@ -50,7 +51,7 @@ export class Game extends Engine {
 
   public resetGameData() {
     Resources.WindSfx.stop();
-    this.points = 0;
+    this._points = 0;
 
     this.remove(this._gameZone);
     this._gameZone = new GameZone(this);
@@ -72,14 +73,18 @@ export class Game extends Engine {
     return this._gameZone.enemy;
   }
 
-  public set points(val: number) {
-    this._points = val;
-
-    uiManager.hud.updatePointsUI(this._points);
-  }
-
   public get points() {
     return this._points;
+  }
+
+  public addPoints(value: number) {
+    if (this.gameZone.player && this.gameZone.player.getEffectIndexByName(X2Effect.EFFECT_NAME) !== -1) {
+      this._points += value * 2;
+    } else {
+      this._points += value;
+    }
+
+    uiManager.hud.updatePointsUI(this._points);
   }
 
   public get gameZone() {

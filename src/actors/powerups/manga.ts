@@ -35,7 +35,7 @@ export class Manga extends Actor {
           }
           Resources.CollectSfx.play();
 
-          engine.points += 1;
+          engine.addPoints(1);
 
           engine.player.heal(35);
           engine.player.horny += 25;

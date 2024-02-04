@@ -2,10 +2,12 @@ import { Actor, CollisionType, EdgeCollider, Engine, Logger, Scene, SceneActivat
 
 import { Cat } from '../../actors/damage-zones/enemy/cat';
 import { Fly } from '../../actors/enemies/fly/fly';
+import { Goblin } from '../../actors/enemies/goblin/goblin';
 import { SmallAbomination } from '../../actors/enemies/small-abominaton/small-abomination';
 import { Player } from '../../actors/player/player';
 import { Banana } from '../../actors/powerups/banana';
 import { BubbleWrap } from '../../actors/powerups/bubble-wrap';
+import { Crocus } from '../../actors/powerups/crocus';
 import { FruitIce } from '../../actors/powerups/fruit-ice';
 import { Manga } from '../../actors/powerups/manga';
 import { Pantsu } from '../../actors/powerups/pantsu';
@@ -19,7 +21,19 @@ export const SCENE_WIDTH = 1280;
 export const SCENE_HEIGHT = 720;
 export const SCENE_PADDING = 70;
 
-const mapKeys = ['hole', 'vodka', 'banana', 'manga', 'fruit-ice', 'pantsu', 'bubble-wrap', 'fly', 'small-abomination'] as const;
+const mapKeys = [
+  'hole',
+  'vodka',
+  'banana',
+  'manga',
+  'fruit-ice',
+  'pantsu',
+  'bubble-wrap',
+  'crocus',
+  'fly',
+  'small-abomination',
+  'goblin'
+] as const;
 
 export type ObjectOnMapKey = (typeof mapKeys)[number];
 
@@ -115,8 +129,10 @@ export class GameZone extends Scene {
 
     this._difficultyTimer = new Timer({
       fcn: () => {
-        if (engine.points < 100) {
+        if (engine.points < 500) {
           this._currentDifficulty += Math.sin(engine.points / 75);
+
+          Logger.getInstance().info('increasing diff', this.currentDifficulty);
 
           this.enemy.updateTimers(engine);
           this.updateSpawnTimers();
@@ -202,6 +218,14 @@ export class GameZone extends Scene {
     );
 
     this.createSpawnTimer(
+      'crocus',
+      () => {
+        this.spawnCrocus(new Crocus());
+      },
+      Math.max(27000, 29000 / this.currentDifficulty)
+    );
+
+    this.createSpawnTimer(
       'fly',
       () => {
         this.spawnFlys(new Fly());
@@ -215,6 +239,16 @@ export class GameZone extends Scene {
         this.spawnSmallAbomination(new SmallAbomination());
       },
       Math.max(5000, 5000 / this.currentDifficulty)
+    );
+
+    this.createSpawnTimer(
+      'goblin',
+      () => {
+        if (this.currentDifficulty > 2) {
+          this.spawnGoblin(new Goblin());
+        }
+      },
+      Math.max(3000, 4000 / this.currentDifficulty)
     );
   }
 
@@ -263,8 +297,10 @@ export class GameZone extends Scene {
   spawnFruitIces = this.createSpawnFunction('fruit-ice', 1);
   spawnPantsu = this.createSpawnFunction('pantsu', 1);
   spawnBubbleWraps = this.createSpawnFunction('bubble-wrap', 1);
+  spawnCrocus = this.createSpawnFunction('crocus', 1);
   spawnFlys = this.createSpawnFunction('fly', 10);
   spawnSmallAbomination = this.createSpawnFunction('small-abomination', 15);
+  spawnGoblin = this.createSpawnFunction('goblin', 20);
 
   setupBackground(engine: Game) {
     const actor = new Actor({

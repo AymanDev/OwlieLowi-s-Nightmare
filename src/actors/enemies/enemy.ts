@@ -67,7 +67,7 @@ export class Enemy extends Actor {
 
         this._deathAnimation.reset();
         this.graphics.use(this._deathAnimation);
-        this.onDead();
+        this.onDead(engine);
         return;
       }
 
@@ -104,7 +104,7 @@ export class Enemy extends Actor {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function -- callback for extenders
-  onDead() {}
+  onDead(engine:Game) {}
 
   onDamage(engine: Game) {
     this._canAttack = false;

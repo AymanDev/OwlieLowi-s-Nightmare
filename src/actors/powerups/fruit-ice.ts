@@ -33,7 +33,7 @@ export class FruitIce extends Actor {
 
           engine.player.heal(10);
 
-          engine.points += 2;
+          engine.addPoints(2);
           engine.player.dragModificator -= 0.01;
 
           this.kill();

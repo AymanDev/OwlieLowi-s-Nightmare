@@ -1,4 +1,5 @@
 import { BaseUi, ui } from './ui';
+import { Effect } from '../actors/player/effects/effect';
 
 const hud = ui.querySelector('#hud');
 
@@ -19,6 +20,8 @@ const dashEl = hud.querySelector<HTMLDivElement>('#dash .value');
 const shiftEl = hud.querySelector('#dash > .key');
 
 const spacebarEl = hud.querySelector('.bottlesContainer > .key');
+
+const effectsEl = hud.querySelector('#effects');
 
 export class Hud extends BaseUi {
   constructor() {
@@ -84,5 +87,13 @@ export class Hud extends BaseUi {
 
   public unpressSpacebarKey() {
     spacebarEl.classList.remove('pressed');
+  }
+
+  public showEffect(effect: string) {
+    effectsEl.querySelector(`.${effect}`).classList.remove('hide');
+  }
+
+  public hideEffect(effect: string) {
+    effectsEl.querySelector(`.${effect}`).classList.add('hide');
   }
 }
